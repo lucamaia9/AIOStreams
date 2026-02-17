@@ -13,7 +13,7 @@ import {
   SearchResponse,
   SearchResultItem,
 } from './api.js';
-import { createQueryLimit, useAllTitles } from '../../utils/general.js';
+import { useAllTitles } from '../../utils/general.js';
 
 export const NabAddonConfigSchema = BaseDebridConfigSchema.extend({
   url: z.string(),
@@ -46,7 +46,6 @@ export abstract class BaseNabAddon<
     const forceIncludeSeasonEpInParams = ['StremThru'];
     const start = Date.now();
     const queryParams: Record<string, string> = {};
-    const queryLimit = createQueryLimit();
     let capabilities: Capabilities;
     let searchType: SearchResultMetadata['searchType'] = 'id';
     try {
@@ -156,12 +155,28 @@ export abstract class BaseNabAddon<
     if (queries.length > 0) {
       this.logger.debug('Performing queries', { queries });
       const searchPromises = queries.map((q) =>
-        queryLimit(() =>
-          this.fetchResults(searchFunction, { ...queryParams, q })
-        )
+        this.fetchResults(searchFunction, { ...queryParams, q })
       );
-      const allResults = await Promise.all(searchPromises);
-      results = allResults.flat();
+      const settledResults = await Promise.allSettled(searchPromises);
+      const failedQueries = settledResults.filter(
+        (result) => result.status === 'rejected'
+      );
+
+      if (failedQueries.length > 0) {
+        this.logger.warn(
+          `Nab search had ${failedQueries.length}/${queries.length} failed queries; returning partial fulfilled results.`
+        );
+      }
+
+      results = settledResults
+        .filter(
+          (
+            result
+          ): result is PromiseFulfilledResult<
+            SearchResultItem<A['namespace']>[]
+          > => result.status === 'fulfilled'
+        )
+        .flatMap((result) => result.value);
     } else {
       results = await this.fetchResults(searchFunction, queryParams);
     }
@@ -216,7 +231,6 @@ export abstract class BaseNabAddon<
     searchFunction: string,
     params: Record<string, string>
   ): Promise<SearchResultItem<A['namespace']>[]> {
-    const queryLimit = createQueryLimit();
     const maxPages = Env.BUILTIN_NAB_MAX_PAGES;
 
     const initialResponse: SearchResponse<A['namespace']> =
@@ -277,24 +291,32 @@ export abstract class BaseNabAddon<
           // Create requests for all remaining pages in parallel
           const pagePromises = Array.from({ length: pagesToFetch }, (_, i) => {
             const offset = initialOffset + limit * (i + 1);
-            return queryLimit(
-              () =>
-                this.api.search(searchFunction, {
-                  ...params,
-                  offset: offset.toString(),
-                }) as Promise<SearchResponse<A['namespace']>>
-            );
+            return this.api.search(searchFunction, {
+              ...params,
+              offset: offset.toString(),
+            }) as Promise<SearchResponse<A['namespace']>>;
           });
 
-          const pageResponses = await Promise.all(pagePromises);
-          for (const response of pageResponses) {
-            if (areResultsDuplicate(allResults, response.results)) {
+          const settledPageResponses = await Promise.allSettled(pagePromises);
+          const failedPages = settledPageResponses.filter(
+            (result) => result.status === 'rejected'
+          );
+          if (failedPages.length > 0) {
+            this.logger.warn(
+              `Nab pagination had ${failedPages.length}/${pagePromises.length} failed page requests; returning partial page results.`
+            );
+          }
+
+          for (const response of settledPageResponses) {
+            if (response.status !== 'fulfilled') continue;
+
+            if (areResultsDuplicate(allResults, response.value.results)) {
               this.logger.warn(
                 'Detected duplicate results in paginated response. Indexer may not support offset parameter despite claiming support. Stopping pagination.'
               );
               break;
             }
-            allResults.push(...response.results);
+            allResults.push(...response.value.results);
           }
         }
       }

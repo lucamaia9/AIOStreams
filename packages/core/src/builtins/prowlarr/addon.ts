@@ -19,7 +19,7 @@ import {
   extractTrackersFromMagnet,
   validateInfoHash,
 } from '../utils/debrid.js';
-import { createQueryLimit, useAllTitles } from '../utils/general.js';
+import { useAllTitles } from '../utils/general.js';
 import { createHash } from 'crypto';
 
 export const ProwlarrAddonConfigSchema = BaseDebridConfigSchema.extend({
@@ -193,7 +193,6 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
       return [];
     }
 
-    const queryLimit = createQueryLimit();
     const chosenIndexers = await this.getIndexersByProtocol(protocol);
 
     if (chosenIndexers.length === 0) {
@@ -208,8 +207,7 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
       return [];
     }
 
-    const searchPromises = queries.map((q) =>
-      queryLimit(async () => {
+    const searchPromises = queries.map(async (q) => {
         const start = Date.now();
         const { data } = await this.api.search({
           query: q,
@@ -224,10 +222,27 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
           }
         );
         return data;
-      })
+      }
     );
-    const allResults = await Promise.all(searchPromises);
-    return allResults.flat();
+    const settledResults = await Promise.allSettled(searchPromises);
+    const failedQueries = settledResults.filter(
+      (result) => result.status === 'rejected'
+    );
+
+    if (failedQueries.length > 0) {
+      this.logger.warn(
+        `Prowlarr ${protocol} search had ${failedQueries.length}/${queries.length} failed queries; returning partial fulfilled results.`
+      );
+    }
+
+    return settledResults
+      .filter(
+        (
+          result
+        ): result is PromiseFulfilledResult<ProwlarrApiSearchItem[]> =>
+          result.status === 'fulfilled'
+      )
+      .flatMap((result) => result.value);
   }
 
   protected async _searchTorrents(
