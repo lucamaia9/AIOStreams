@@ -151,13 +151,15 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
       }
     }
 
-    try {
-      const { data } = await this.api.tags();
-      chosenTags = data
-        .filter((tag) => this.tags.includes(tag.label.toLowerCase()))
-        .map((tag) => tag.id);
-    } catch (error) {
-      logger.warn(`Failed to get Prowlarr tags: ${error}`);
+    if (this.tags.length > 0) {
+      try {
+        const { data } = await this.api.tags();
+        chosenTags = data
+          .filter((tag) => this.tags.includes(tag.label.toLowerCase()))
+          .map((tag) => tag.id);
+      } catch (error) {
+        logger.warn(`Failed to get Prowlarr tags: ${error}`);
+      }
     }
 
     const chosenIndexers = availableIndexers.filter(
@@ -216,7 +218,7 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
           query: q,
           indexerIds: chosenIndexers.map((indexer) => indexer.id),
           type: 'search',
-          limit: 500,
+          limit: 200,
         });
         this.logger.info(
           `Prowlarr ${protocol} search for ${q} took ${getTimeTakenSincePoint(start)}`,
