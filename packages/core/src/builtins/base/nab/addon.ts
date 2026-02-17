@@ -152,7 +152,9 @@ export abstract class BaseNabAddon<
       searchType = 'query';
     }
     queryParams.extended = '1';
-    const searchTimeout = this.userData.searchTimeout;
+    const searchTimeout = this.userData.searchTimeout
+      ? Math.max(Env.MIN_TIMEOUT, this.userData.searchTimeout - 1000)
+      : undefined;
     let results: SearchResultItem<A['namespace']>[] = [];
     if (queries.length > 0) {
       this.logger.debug('Performing queries', { queries });
