@@ -14,6 +14,7 @@ import {
   SearchResultItem,
 } from './api.js';
 import { useAllTitles } from '../../utils/general.js';
+import { collectUntilDeadline } from '../../utils/deadline.js';
 
 export const NabAddonConfigSchema = BaseDebridConfigSchema.extend({
   url: z.string(),
@@ -179,26 +180,21 @@ export abstract class BaseNabAddon<
       const searchPromises = queries.map((q) =>
         this.fetchResults(searchFunction, { ...queryParams, q }, searchTimeout)
       );
-      const settledResults = await Promise.allSettled(searchPromises);
-      const failedQueries = settledResults.filter(
-        (result) => result.status === 'rejected'
-      );
+      const collected = await collectUntilDeadline(searchPromises, searchTimeout);
 
-      if (failedQueries.length > 0) {
+      if (collected.failed > 0 || collected.pendingAtDeadline > 0) {
         this.logger.warn(
-          `Nab search had ${failedQueries.length}/${queries.length} failed queries; returning partial fulfilled results.`
+          `Nab search returned partial query results.`,
+          {
+            failedQueries: collected.failed,
+            pendingAtDeadline: collected.pendingAtDeadline,
+            totalQueries: collected.total,
+            timedOut: collected.timedOut,
+          }
         );
       }
 
-      results = settledResults
-        .filter(
-          (
-            result
-          ): result is PromiseFulfilledResult<
-            SearchResultItem<A['namespace']>[]
-          > => result.status === 'fulfilled'
-        )
-        .flatMap((result) => result.value);
+      results = collected.fulfilled.flatMap((result) => result);
     } else {
       results = await this.fetchResults(
         searchFunction,

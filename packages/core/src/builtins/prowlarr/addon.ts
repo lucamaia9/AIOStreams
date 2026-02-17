@@ -21,6 +21,7 @@ import {
 } from '../utils/debrid.js';
 import { useAllTitles } from '../utils/general.js';
 import { createHash } from 'crypto';
+import { collectUntilDeadline } from '../utils/deadline.js';
 
 export const ProwlarrAddonConfigSchema = BaseDebridConfigSchema.extend({
   url: z.string(),
@@ -213,6 +214,10 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
       return [];
     }
 
+    const searchTimeout = this.userData.searchTimeout
+      ? Math.max(Env.MIN_TIMEOUT, this.userData.searchTimeout - 250)
+      : undefined;
+
     const searchPromises = queries.map(async (q) => {
         const start = Date.now();
         const { data } = await this.api.search({
@@ -230,25 +235,21 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
         return data;
       }
     );
-    const settledResults = await Promise.allSettled(searchPromises);
-    const failedQueries = settledResults.filter(
-      (result) => result.status === 'rejected'
-    );
+    const collected = await collectUntilDeadline(searchPromises, searchTimeout);
 
-    if (failedQueries.length > 0) {
+    if (collected.failed > 0 || collected.pendingAtDeadline > 0) {
       this.logger.warn(
-        `Prowlarr ${protocol} search had ${failedQueries.length}/${queries.length} failed queries; returning partial fulfilled results.`
+        `Prowlarr ${protocol} search returned partial query results.`,
+        {
+          failedQueries: collected.failed,
+          pendingAtDeadline: collected.pendingAtDeadline,
+          totalQueries: collected.total,
+          timedOut: collected.timedOut,
+        }
       );
     }
 
-    return settledResults
-      .filter(
-        (
-          result
-        ): result is PromiseFulfilledResult<ProwlarrApiSearchItem[]> =>
-          result.status === 'fulfilled'
-      )
-      .flatMap((result) => result.value);
+    return collected.fulfilled.flatMap((result) => result);
   }
 
   protected async _searchTorrents(
