@@ -212,6 +212,34 @@ export type SearchResponse<T extends 'torznab' | 'newznab'> = {
   results: SearchResultItem<T>[];
 };
 
+export type JackettIndexer = {
+  id: string;
+  title?: string;
+};
+
+const JackettIndexersSchema = z
+  .object({
+    indexers: z.object({
+      indexer: z
+        .array(
+          z.object({
+            $: z.object({ id: z.string().optional() }),
+            title: z.array(z.string()).optional(),
+          })
+        )
+        .optional()
+        .default([]),
+    }),
+  })
+  .transform(({ indexers }) =>
+    indexers.indexer
+      .filter((indexer) => Boolean(indexer.$.id))
+      .map((indexer) => ({
+        id: indexer.$.id!,
+        title: indexer.title?.[0],
+      }))
+  );
+
 type RawSearchResponse = {
   offset?: number;
   total?: number;
@@ -372,6 +400,17 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     });
   }
 
+
+  public async getJackettIndexers(
+    configured: boolean = true
+  ): Promise<JackettIndexer[]> {
+    return this.request(
+      'indexers',
+      JackettIndexersSchema,
+      { configured: configured ? 'true' : 'false' },
+      5000
+    );
+  }
   private removeTrailingSlash = (path: string) =>
     path.endsWith('/') ? path.slice(0, -1) : path;
 

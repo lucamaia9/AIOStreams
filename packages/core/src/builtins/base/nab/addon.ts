@@ -10,6 +10,7 @@ import {
 import {
   BaseNabApi,
   Capabilities,
+  JackettIndexer,
   SearchResponse,
   SearchResultItem,
 } from './api.js';
@@ -39,10 +40,22 @@ export abstract class BaseNabAddon<
 > extends BaseDebridAddon<C> {
   abstract api: A;
 
+  private static readonly JACKETT_INDEXER_CACHE_TTL_MS = 5 * 60 * 1000;
+  private static readonly JACKETT_INDEXER_QUARANTINE_MS = 10 * 60 * 1000;
+  private static readonly JACKETT_INDEXER_FAILURE_THRESHOLD = 3;
+
+  private static readonly jackettIndexersCache = new Map<
+    string,
+    { expiresAt: number; indexers: JackettIndexer[] }
+  >();
+
+  private static readonly jackettIndexerHealth = new Map<
+    string,
+    { failures: number; quarantinedUntil: number }
+  >();
+
   private shouldForceQuerySearch(): boolean {
-    const isJackettAllIndexers = this.userData.url
-      .toLowerCase()
-      .includes('/api/v2.0/indexers/all/results/torznab');
+    const isJackettAllIndexers = this.isJackettAllIndexersUrl();
 
     if (!isJackettAllIndexers) {
       return this.userData.forceQuerySearch;
@@ -53,6 +66,215 @@ export abstract class BaseNabAddon<
     }
 
     return false;
+  }
+
+  private isJackettAllIndexersUrl(): boolean {
+    return this.userData.url
+      .toLowerCase()
+      .includes('/api/v2.0/indexers/all/results/torznab');
+  }
+
+  private normalizeIndexerId(indexerId: string): string {
+    return indexerId.trim().toLowerCase();
+  }
+
+  private getIndexerHealthKey(indexerId: string): string {
+    return `${this.userData.url.toLowerCase()}::${this.normalizeIndexerId(indexerId)}`;
+  }
+
+  private isIndexerQuarantined(indexerId: string): boolean {
+    const key = this.getIndexerHealthKey(indexerId);
+    const health = BaseNabAddon.jackettIndexerHealth.get(key);
+    if (!health) return false;
+
+    if (health.quarantinedUntil > Date.now()) return true;
+
+    BaseNabAddon.jackettIndexerHealth.delete(key);
+    return false;
+  }
+
+  private markIndexerSuccess(indexerId: string): void {
+    const key = this.getIndexerHealthKey(indexerId);
+    BaseNabAddon.jackettIndexerHealth.delete(key);
+  }
+
+  private markIndexerFailure(indexerId: string, reason: unknown): void {
+    const key = this.getIndexerHealthKey(indexerId);
+    const current =
+      BaseNabAddon.jackettIndexerHealth.get(key) ?? {
+        failures: 0,
+        quarantinedUntil: 0,
+      };
+    current.failures += 1;
+
+    if (current.failures >= BaseNabAddon.JACKETT_INDEXER_FAILURE_THRESHOLD) {
+      current.failures = 0;
+      current.quarantinedUntil =
+        Date.now() + BaseNabAddon.JACKETT_INDEXER_QUARANTINE_MS;
+      this.logger.warn('Quarantining Jackett indexer after repeated failures', {
+        indexerId,
+        quarantineMs: BaseNabAddon.JACKETT_INDEXER_QUARANTINE_MS,
+        reason: reason instanceof Error ? reason.message : String(reason),
+      });
+    }
+
+    BaseNabAddon.jackettIndexerHealth.set(key, current);
+  }
+
+  private async getJackettIndexers(): Promise<JackettIndexer[]> {
+    const cacheKey = this.userData.url.toLowerCase();
+    const cached = BaseNabAddon.jackettIndexersCache.get(cacheKey);
+    const now = Date.now();
+    if (cached && cached.expiresAt > now) {
+      return cached.indexers;
+    }
+
+    const indexers = await this.api.getJackettIndexers(true);
+    BaseNabAddon.jackettIndexersCache.set(cacheKey, {
+      indexers,
+      expiresAt: now + BaseNabAddon.JACKETT_INDEXER_CACHE_TTL_MS,
+    });
+    return indexers;
+  }
+
+  private prioritizeQueries(parsedId: ParsedId, queries: string[]): string[] {
+    const uniqueQueries = [...new Set(queries)];
+
+    if (
+      parsedId.mediaType !== 'series' ||
+      parsedId.season === undefined ||
+      parsedId.episode === undefined
+    ) {
+      return uniqueQueries;
+    }
+
+    const season = parsedId.season.toString().padStart(2, '0');
+    const episode = parsedId.episode.toString().padStart(2, '0');
+    const fullPattern = new RegExp(`S${season}E${episode}`, 'i');
+    const seasonPattern = new RegExp(`S${season}`, 'i');
+
+    return uniqueQueries.sort((left, right) => {
+      const score = (query: string) => {
+        if (fullPattern.test(query)) return 0;
+        if (seasonPattern.test(query)) return 1;
+        return 2;
+      };
+
+      return score(left) - score(right);
+    });
+  }
+
+  private async searchJackettByIndexer(
+    searchFunction: string,
+    baseParams: Record<string, string>,
+    queries: string[],
+    searchTimeout?: number,
+    parsedId?: ParsedId
+  ): Promise<SearchResultItem<A['namespace']>[]> {
+    let availableIndexers: JackettIndexer[] = [];
+    try {
+      availableIndexers = await this.getJackettIndexers();
+    } catch (error) {
+      this.logger.warn(
+        `Could not fetch Jackett indexers, falling back to aggregate query mode: ${error instanceof Error ? error.message : String(error)}`
+      );
+      const fallbackPromises = queries.map((q) =>
+        this.fetchResults(searchFunction, { ...baseParams, q }, searchTimeout)
+      );
+      const fallbackCollected = await collectUntilDeadline(
+        fallbackPromises,
+        searchTimeout
+      );
+      return fallbackCollected.fulfilled.flatMap((result) => result);
+    }
+
+    if (availableIndexers.length === 0) {
+      return [];
+    }
+
+    const start = Date.now();
+    const allResults: SearchResultItem<A['namespace']>[] = [];
+    const prioritizedQueries =
+      parsedId !== undefined ? this.prioritizeQueries(parsedId, queries) : queries;
+
+    for (const query of prioritizedQueries) {
+      const elapsed = Date.now() - start;
+      const remaining =
+        searchTimeout === undefined ? undefined : Math.max(0, searchTimeout - elapsed);
+      if (remaining !== undefined && remaining <= 0) {
+        break;
+      }
+
+      const healthyIndexers = availableIndexers.filter(
+        (indexer) => !this.isIndexerQuarantined(indexer.id)
+      );
+      const chosenIndexers =
+        healthyIndexers.length > 0 ? healthyIndexers : availableIndexers;
+
+      const taskMeta = chosenIndexers.map((indexer) => ({
+        indexerId: indexer.id,
+        query,
+      }));
+      const searchPromises = taskMeta.map((meta) =>
+        this.fetchResults(
+          searchFunction,
+          {
+            ...baseParams,
+            q: meta.query,
+            'Tracker[]': meta.indexerId,
+          },
+          remaining
+        ).then((results) => ({
+          indexerId: meta.indexerId,
+          results,
+        }))
+      );
+
+      const collected = await collectUntilDeadline(searchPromises, remaining);
+
+      for (const fulfilled of collected.fulfilled) {
+        this.markIndexerSuccess(fulfilled.indexerId);
+        if (fulfilled.results.length > 0) {
+          allResults.push(...fulfilled.results);
+        }
+      }
+
+      for (const rejected of collected.rejected) {
+        const failedTask = taskMeta[rejected.index];
+        if (failedTask) {
+          this.markIndexerFailure(failedTask.indexerId, rejected.reason);
+        }
+      }
+
+      for (const pendingIndex of collected.pendingIndexes) {
+        const pendingTask = taskMeta[pendingIndex];
+        if (pendingTask) {
+          this.markIndexerFailure(
+            pendingTask.indexerId,
+            `query deadline reached for ${pendingTask.query}`
+          );
+        }
+      }
+
+      if (collected.failed > 0 || collected.pendingAtDeadline > 0) {
+        this.logger.warn('Jackett per-indexer query returned partial results', {
+          query,
+          failedRequests: collected.failed,
+          pendingAtDeadline: collected.pendingAtDeadline,
+          totalRequests: collected.total,
+          timedOut: collected.timedOut,
+          selectedIndexers: chosenIndexers.length,
+          quarantinedIndexers:
+            availableIndexers.length - healthyIndexers.length,
+        });
+      }
+
+      if (parsedId?.mediaType === 'series' && allResults.length > 0) {
+        break;
+      }
+    }
+
+    return allResults;
   }
 
   protected async performSearch(
@@ -176,25 +398,34 @@ export abstract class BaseNabAddon<
       : undefined;
     let results: SearchResultItem<A['namespace']>[] = [];
     if (queries.length > 0) {
+      queries = this.prioritizeQueries(parsedId, queries);
       this.logger.debug('Performing queries', { queries });
-      const searchPromises = queries.map((q) =>
-        this.fetchResults(searchFunction, { ...queryParams, q }, searchTimeout)
-      );
-      const collected = await collectUntilDeadline(searchPromises, searchTimeout);
 
-      if (collected.failed > 0 || collected.pendingAtDeadline > 0) {
-        this.logger.warn(
-          `Nab search returned partial query results.`,
-          {
+      if (this.isJackettAllIndexersUrl()) {
+        results = await this.searchJackettByIndexer(
+          searchFunction,
+          queryParams,
+          queries,
+          searchTimeout,
+          parsedId
+        );
+      } else {
+        const searchPromises = queries.map((q) =>
+          this.fetchResults(searchFunction, { ...queryParams, q }, searchTimeout)
+        );
+        const collected = await collectUntilDeadline(searchPromises, searchTimeout);
+
+        if (collected.failed > 0 || collected.pendingAtDeadline > 0) {
+          this.logger.warn(`Nab search returned partial query results.`, {
             failedQueries: collected.failed,
             pendingAtDeadline: collected.pendingAtDeadline,
             totalQueries: collected.total,
             timedOut: collected.timedOut,
-          }
-        );
-      }
+          });
+        }
 
-      results = collected.fulfilled.flatMap((result) => result);
+        results = collected.fulfilled.flatMap((result) => result);
+      }
     } else {
       results = await this.fetchResults(
         searchFunction,

@@ -2,6 +2,8 @@ export interface DeadlineCollectionResult<T> {
   fulfilled: T[];
   failed: number;
   pendingAtDeadline: number;
+  pendingIndexes: number[];
+  rejected: Array<{ index: number; reason: unknown }>;
   timedOut: boolean;
   total: number;
 }
@@ -33,6 +35,8 @@ export async function collectUntilDeadline<T>(
       fulfilled: [],
       failed: 0,
       pendingAtDeadline: 0,
+      pendingIndexes: [],
+      rejected: [],
       timedOut: false,
       total: 0,
     };
@@ -60,6 +64,7 @@ export async function collectUntilDeadline<T>(
   wrapped.forEach((promise, index) => pending.set(index, promise));
 
   const fulfilled: T[] = [];
+  const rejected: Array<{ index: number; reason: unknown }> = [];
   let failed = 0;
   let timedOut = false;
   const start = Date.now();
@@ -96,13 +101,18 @@ export async function collectUntilDeadline<T>(
       fulfilled.push(settled.value);
     } else {
       failed++;
+      rejected.push({ index: settled.index, reason: settled.reason });
     }
   }
+
+  const pendingIndexes = Array.from(pending.keys());
 
   return {
     fulfilled,
     failed,
     pendingAtDeadline: pending.size,
+    pendingIndexes,
+    rejected,
     timedOut,
     total: promises.length,
   };
