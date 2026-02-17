@@ -32,6 +32,17 @@ const logger = createLogger('stremio');
 export class StremioTransformer {
   constructor(private readonly userData: UserData) {}
 
+  private isTimeoutError(error: AIOStreamsError): boolean {
+    const title = (error.title || '').toLowerCase();
+    const description = (error.description || '').toLowerCase();
+    return (
+      title.includes('timeout') ||
+      description.includes('timeout') ||
+      description.includes('aborted due to timeout') ||
+      description.includes('timed out after')
+    );
+  }
+
   public showError(resource: Resource, errors: AIOStreamsError[]) {
     if (
       errors.length > 0 &&
@@ -265,10 +276,15 @@ export class StremioTransformer {
       `Transformed ${streams.length} streams using ${this.userData.formatter.id} formatter in ${getTimeTakenSincePoint(start)}`
     );
 
+    const effectiveErrors =
+      transformedStreams.length > 0
+        ? errors.filter((error) => !this.isTimeoutError(error))
+        : errors;
+
     // add errors to the end (if this.userData.hideErrors is false  or the resource is not in this.userData.hideErrorsForResources)
-    if (this.showError('stream', errors)) {
+    if (this.showError('stream', effectiveErrors)) {
       transformedStreams.push(
-        ...errors.map((error) =>
+        ...effectiveErrors.map((error) =>
           StremioTransformer.createErrorStream({
             errorTitle: error.title,
             errorDescription: error.description,
