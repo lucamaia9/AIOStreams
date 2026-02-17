@@ -400,6 +400,35 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     });
   }
 
+  public async searchWithApiPath(
+    searchFunction: string = 'search',
+    params: Record<string, string | number | boolean> = {},
+    apiPathOverride?: string,
+    timeout?: number
+  ): Promise<SearchResponse<N>> {
+    const normalizedApiPath = apiPathOverride
+      ? this.removeTrailingSlash(apiPathOverride)
+      : this.apiPath;
+    const cacheKey = `${this.baseUrl}${normalizedApiPath}?t=${searchFunction}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
+
+    return searchWithBackgroundRefresh({
+      searchCache: this.searchCache as Cache<string, SearchResponse<N>>,
+      searchCacheKey: cacheKey,
+      bgCacheKey: `nab:${cacheKey}`,
+      cacheTTL: Env.BUILTIN_NAB_SEARCH_CACHE_TTL,
+      fetchFn: () =>
+        this.request(
+          searchFunction,
+          this.SearchResultSchema as z.ZodSchema<SearchResponse<N>>,
+          params,
+          timeout,
+          normalizedApiPath
+        ),
+      isEmptyResult: (result) => result.results.length === 0,
+      logger: this.logger,
+    });
+  }
+
 
   public async getJackettIndexers(
     configured: boolean = true
@@ -427,12 +456,14 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     func: string,
     schema: z.ZodSchema<T>,
     params: Record<string, string | number | boolean> = {},
-    timeout?: number
+    timeout?: number,
+    apiPathOverride?: string
   ): Promise<T> {
-    const lockKey = `${this.baseUrl}${this.apiPath}?t=${func}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
+    const effectiveApiPath = apiPathOverride ?? this.apiPath;
+    const lockKey = `${this.baseUrl}${effectiveApiPath}?t=${func}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
     const { result } = await DistributedLock.getInstance().withLock(
       lockKey,
-      () => this._request(func, schema, params, timeout),
+      () => this._request(func, schema, params, timeout, effectiveApiPath),
       {
         timeout: timeout ?? Env.BUILTIN_NAB_SEARCH_TIMEOUT,
         ttl: (timeout ?? Env.BUILTIN_NAB_SEARCH_TIMEOUT) + 1000,
@@ -445,10 +476,11 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     func: string,
     schema: z.ZodSchema<T>,
     params: Record<string, string | number | boolean> = {},
-    timeout?: number
+    timeout?: number,
+    apiPathOverride?: string
   ): Promise<T> {
     const start = Date.now();
-    const url = new URL(`${this.baseUrl}${this.apiPath}`);
+    const url = new URL(`${this.baseUrl}${apiPathOverride ?? this.apiPath}`);
     const searchParams = new URLSearchParams({
       t: func,
       ...Object.fromEntries(

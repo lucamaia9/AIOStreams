@@ -137,6 +137,20 @@ export abstract class BaseNabAddon<
     return indexers;
   }
 
+  private buildJackettIndexerApiPath(indexerId: string): string {
+    const rawApiPath = this.userData.apiPath ?? '/api';
+    const resolvedPath = new URL(this.userData.url + rawApiPath).pathname;
+
+    if (!resolvedPath.includes('/indexers/all/results/torznab/')) {
+      return resolvedPath;
+    }
+
+    return resolvedPath.replace(
+      '/indexers/all/results/torznab/',
+      `/indexers/${encodeURIComponent(indexerId)}/results/torznab/`
+    );
+  }
+
   private prioritizeQueries(parsedId: ParsedId, queries: string[]): string[] {
     const uniqueQueries = [...new Set(queries)];
 
@@ -216,18 +230,20 @@ export abstract class BaseNabAddon<
         query,
       }));
       const searchPromises = taskMeta.map((meta) =>
-        this.fetchResults(
-          searchFunction,
-          {
-            ...baseParams,
-            q: meta.query,
-            'Tracker[]': meta.indexerId,
-          },
-          remaining
-        ).then((results) => ({
-          indexerId: meta.indexerId,
-          results,
-        }))
+        this.api
+          .searchWithApiPath(
+            searchFunction,
+            {
+              ...baseParams,
+              q: meta.query,
+            },
+            this.buildJackettIndexerApiPath(meta.indexerId),
+            remaining
+          )
+          .then((response) => ({
+            indexerId: meta.indexerId,
+            results: response.results as SearchResultItem<A['namespace']>[],
+          }))
       );
 
       const collected = await collectUntilDeadline(searchPromises, remaining);
