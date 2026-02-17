@@ -257,6 +257,10 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
   private readonly userAgent: string;
   private readonly httpProxy: string | undefined;
 
+  private isAbsoluteUrl(urlOrPath: string): boolean {
+    return /^https?:\/\//i.test(urlOrPath);
+  }
+
   constructor(
     public readonly namespace: N,
     logger: Logger,
@@ -409,7 +413,10 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     const normalizedApiPath = apiPathOverride
       ? this.removeTrailingSlash(apiPathOverride)
       : this.apiPath;
-    const cacheKey = `${this.baseUrl}${normalizedApiPath}?t=${searchFunction}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
+    const endpointForCache = this.isAbsoluteUrl(normalizedApiPath)
+      ? normalizedApiPath
+      : `${this.baseUrl}${normalizedApiPath}`;
+    const cacheKey = `${endpointForCache}?t=${searchFunction}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
 
     return searchWithBackgroundRefresh({
       searchCache: this.searchCache as Cache<string, SearchResponse<N>>,
@@ -460,7 +467,10 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     apiPathOverride?: string
   ): Promise<T> {
     const effectiveApiPath = apiPathOverride ?? this.apiPath;
-    const lockKey = `${this.baseUrl}${effectiveApiPath}?t=${func}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
+    const endpointForLockKey = this.isAbsoluteUrl(effectiveApiPath)
+      ? effectiveApiPath
+      : `${this.baseUrl}${effectiveApiPath}`;
+    const lockKey = `${endpointForLockKey}?t=${func}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
     const { result } = await DistributedLock.getInstance().withLock(
       lockKey,
       () => this._request(func, schema, params, timeout, effectiveApiPath),
@@ -480,7 +490,10 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
     apiPathOverride?: string
   ): Promise<T> {
     const start = Date.now();
-    const url = new URL(`${this.baseUrl}${apiPathOverride ?? this.apiPath}`);
+    const effectiveApiPath = apiPathOverride ?? this.apiPath;
+    const url = this.isAbsoluteUrl(effectiveApiPath)
+      ? new URL(effectiveApiPath)
+      : new URL(`${this.baseUrl}${effectiveApiPath}`);
     const searchParams = new URLSearchParams({
       t: func,
       ...Object.fromEntries(

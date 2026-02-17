@@ -138,17 +138,21 @@ export abstract class BaseNabAddon<
   }
 
   private buildJackettIndexerApiPath(indexerId: string): string {
-    const rawApiPath = this.userData.apiPath ?? '/api';
-    const resolvedPath = new URL(this.userData.url + rawApiPath).pathname;
+    const parsedUrl = new URL(this.userData.url);
+    const normalizedPath = parsedUrl.pathname.replace(/\/+$/, '');
+    const replacedPath = normalizedPath.replace(
+      /\/indexers\/all\/results\/torznab(?:\/api)?$/,
+      `/indexers/${encodeURIComponent(indexerId)}/results/torznab/api`
+    );
 
-    if (!resolvedPath.includes('/indexers/all/results/torznab/')) {
-      return resolvedPath;
+    if (replacedPath === normalizedPath) {
+      return this.userData.url;
     }
 
-    return resolvedPath.replace(
-      '/indexers/all/results/torznab/',
-      `/indexers/${encodeURIComponent(indexerId)}/results/torznab/`
-    );
+    parsedUrl.pathname = replacedPath;
+    parsedUrl.search = '';
+    parsedUrl.hash = '';
+    return parsedUrl.toString();
   }
 
   private prioritizeQueries(parsedId: ParsedId, queries: string[]): string[] {
