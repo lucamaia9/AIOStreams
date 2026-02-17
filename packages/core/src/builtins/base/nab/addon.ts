@@ -19,6 +19,7 @@ export const NabAddonConfigSchema = BaseDebridConfigSchema.extend({
   url: z.string(),
   apiKey: z.string().optional(),
   apiPath: z.string().optional(),
+  searchTimeout: z.number().optional(),
   forceQuerySearch: z.boolean().default(false),
   paginate: z.boolean().default(false),
   forceInitialLimit: z.number().optional(),
@@ -151,11 +152,12 @@ export abstract class BaseNabAddon<
       searchType = 'query';
     }
     queryParams.extended = '1';
+    const searchTimeout = this.userData.searchTimeout;
     let results: SearchResultItem<A['namespace']>[] = [];
     if (queries.length > 0) {
       this.logger.debug('Performing queries', { queries });
       const searchPromises = queries.map((q) =>
-        this.fetchResults(searchFunction, { ...queryParams, q })
+        this.fetchResults(searchFunction, { ...queryParams, q }, searchTimeout)
       );
       const settledResults = await Promise.allSettled(searchPromises);
       const failedQueries = settledResults.filter(
@@ -178,7 +180,11 @@ export abstract class BaseNabAddon<
         )
         .flatMap((result) => result.value);
     } else {
-      results = await this.fetchResults(searchFunction, queryParams);
+      results = await this.fetchResults(
+        searchFunction,
+        queryParams,
+        searchTimeout
+      );
     }
     this.logger.info(
       `Completed search for ${capabilities.server.title} in ${getTimeTakenSincePoint(start)}`,
@@ -229,12 +235,13 @@ export abstract class BaseNabAddon<
 
   private async fetchResults(
     searchFunction: string,
-    params: Record<string, string>
+    params: Record<string, string>,
+    timeout?: number
   ): Promise<SearchResultItem<A['namespace']>[]> {
     const maxPages = Env.BUILTIN_NAB_MAX_PAGES;
 
     const initialResponse: SearchResponse<A['namespace']> =
-      await this.api.search(searchFunction, params);
+      await this.api.search(searchFunction, params, timeout);
     let allResults = [...initialResponse.results];
 
     this.logger.debug('Initial search response', {
@@ -294,7 +301,7 @@ export abstract class BaseNabAddon<
             return this.api.search(searchFunction, {
               ...params,
               offset: offset.toString(),
-            }) as Promise<SearchResponse<A['namespace']>>;
+            }, timeout) as Promise<SearchResponse<A['namespace']>>;
           });
 
           const settledPageResponses = await Promise.allSettled(pagePromises);
@@ -341,7 +348,8 @@ export abstract class BaseNabAddon<
           {
             ...params,
             offset: currentOffset.toString(),
-          }
+          },
+          timeout
         );
 
         if (response.results.length === 0) {

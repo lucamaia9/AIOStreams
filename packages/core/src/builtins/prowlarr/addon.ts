@@ -25,6 +25,7 @@ import { createHash } from 'crypto';
 export const ProwlarrAddonConfigSchema = BaseDebridConfigSchema.extend({
   url: z.string(),
   apiKey: z.string(),
+  searchTimeout: z.number().optional(),
   indexers: z.array(z.string()),
   tags: z.array(z.string()),
   sources: z.array(z.string()).optional(),
@@ -59,7 +60,7 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
     this.api = new ProwlarrApi({
       baseUrl: config.url,
       apiKey: config.apiKey,
-      timeout: Env.BUILTIN_PROWLARR_SEARCH_TIMEOUT,
+      timeout: config.searchTimeout ?? Env.BUILTIN_PROWLARR_SEARCH_TIMEOUT,
     });
   }
 

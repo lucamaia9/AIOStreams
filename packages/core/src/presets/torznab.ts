@@ -231,6 +231,7 @@ export class TorznabPreset extends BuiltinAddonPreset {
       url: options.torznabUrl,
       apiPath: options.apiPath,
       apiKey: options.apiKey,
+      searchTimeout: options.timeout ?? this.METADATA.TIMEOUT,
       forceQuerySearch: options.forceQuerySearch ?? false,
       paginate: options.paginate ?? false,
     };

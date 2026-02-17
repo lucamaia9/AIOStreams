@@ -293,6 +293,7 @@ export class ProwlarrPreset extends BuiltinAddonPreset {
       ...this.getBaseConfig(userData, services),
       url: prowlarrUrl,
       apiKey: prowlarrApiKey,
+      searchTimeout: options.timeout || this.METADATA.TIMEOUT,
       indexers: indexers || [],
       sources: options.sources || [],
       tags: typeof options.tags === 'string' ? options.tags.split(',') : [],

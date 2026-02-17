@@ -154,6 +154,7 @@ export class JackettPreset extends TorznabPreset {
       url: `${jackettUrl.replace(/\/$/, '')}/api/v2.0/indexers/all/results/torznab`,
       apiPath: '/api',
       apiKey: jackettApiKey,
+      searchTimeout: options.timeout ?? this.METADATA.TIMEOUT,
       forceQuerySearch: true,
     };
 

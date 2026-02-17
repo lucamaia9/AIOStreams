@@ -350,7 +350,8 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
 
   public async search(
     searchFunction: string = 'search',
-    params: Record<string, string | number | boolean> = {}
+    params: Record<string, string | number | boolean> = {},
+    timeout?: number
   ): Promise<SearchResponse<N>> {
     const cacheKey = `${this.baseUrl}${this.apiPath}?t=${searchFunction}&${JSON.stringify(params)}&apikey=${this.apiKey}&${JSON.stringify(this.params)}`;
 
@@ -363,7 +364,8 @@ export class BaseNabApi<N extends 'torznab' | 'newznab'> {
         this.request(
           searchFunction,
           this.SearchResultSchema,
-          params
+          params,
+          timeout
         ) as Promise<SearchResponse<N>>,
       isEmptyResult: (result) => result.results.length === 0,
       logger: this.logger,

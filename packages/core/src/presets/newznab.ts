@@ -423,6 +423,7 @@ export class NewznabPreset extends BuiltinAddonPreset {
       url: options.newznabUrl,
       apiPath: options.apiPath,
       apiKey: options.apiKey,
+      searchTimeout: options.timeout ?? this.METADATA.TIMEOUT,
       proxyAuth: options.proxyAuth,
       forceQuerySearch: options.forceQuerySearch ?? false,
       paginate: options.paginate ?? false,
