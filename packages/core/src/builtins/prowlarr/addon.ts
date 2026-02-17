@@ -59,10 +59,11 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
     this.sources = (config.sources ?? []).map((x) => x.toLowerCase());
     const searchTimeout =
       config.searchTimeout ?? Env.BUILTIN_PROWLARR_SEARCH_TIMEOUT;
+    const apiTimeout = Math.max(Env.MIN_TIMEOUT, searchTimeout - 4000);
     this.api = new ProwlarrApi({
       baseUrl: config.url,
       apiKey: config.apiKey,
-      timeout: Math.max(Env.MIN_TIMEOUT, searchTimeout - 250),
+      timeout: apiTimeout,
     });
   }
 
