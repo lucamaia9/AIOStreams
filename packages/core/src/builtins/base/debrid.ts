@@ -154,9 +154,25 @@ export abstract class BaseDebridAddon<T extends BaseDebridConfig> {
       ];
     }
 
+    const shouldSearchTorrents = this.userData.services.some(
+      (service) =>
+        !['nzbdav', 'altmount', 'stremio_nntp', 'easynews'].includes(
+          service.id
+        )
+    );
+    const shouldSearchNzbs = this.userData.services.some((service) =>
+      ['nzbdav', 'altmount', 'torbox', 'stremio_nntp', 'easynews'].includes(
+        service.id
+      )
+    );
+
     const searchPromises = await Promise.allSettled([
-      this._searchTorrents(parsedId, searchMetadata),
-      this._searchNzbs(parsedId, searchMetadata),
+      shouldSearchTorrents
+        ? this._searchTorrents(parsedId, searchMetadata)
+        : Promise.resolve([]),
+      shouldSearchNzbs
+        ? this._searchNzbs(parsedId, searchMetadata)
+        : Promise.resolve([]),
     ]);
 
     let torrentResults =

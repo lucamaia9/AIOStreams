@@ -216,7 +216,7 @@ export class ProwlarrAddon extends BaseDebridAddon<ProwlarrAddonConfig> {
           query: q,
           indexerIds: chosenIndexers.map((indexer) => indexer.id),
           type: 'search',
-          limit: 2000,
+          limit: 500,
         });
         this.logger.info(
           `Prowlarr ${protocol} search for ${q} took ${getTimeTakenSincePoint(start)}`,
