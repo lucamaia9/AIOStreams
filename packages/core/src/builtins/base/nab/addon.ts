@@ -21,6 +21,7 @@ export const NabAddonConfigSchema = BaseDebridConfigSchema.extend({
   apiPath: z.string().optional(),
   searchTimeout: z.number().optional(),
   forceQuerySearch: z.boolean().default(false),
+  legacyForceQuerySearch: z.boolean().optional().default(false),
   paginate: z.boolean().default(false),
   forceInitialLimit: z.number().optional(),
 });
@@ -37,6 +38,22 @@ export abstract class BaseNabAddon<
 > extends BaseDebridAddon<C> {
   abstract api: A;
 
+  private shouldForceQuerySearch(): boolean {
+    const isJackettAllIndexers = this.userData.url
+      .toLowerCase()
+      .includes('/api/v2.0/indexers/all/results/torznab');
+
+    if (!isJackettAllIndexers) {
+      return this.userData.forceQuerySearch;
+    }
+
+    if (this.userData.legacyForceQuerySearch) {
+      return true;
+    }
+
+    return false;
+  }
+
   protected async performSearch(
     parsedId: ParsedId,
     metadata: SearchMetadata
@@ -44,6 +61,7 @@ export abstract class BaseNabAddon<
     results: SearchResultItem<A['namespace']>[];
     meta: SearchResultMetadata;
   }> {
+    const forceQuerySearch = this.shouldForceQuerySearch();
     const forceIncludeSeasonEpInParams = ['StremThru'];
     const start = Date.now();
     const queryParams: Record<string, string> = {};
@@ -79,7 +97,7 @@ export abstract class BaseNabAddon<
       capabilities.limits?.max?.toString() ??
       '10000';
 
-    if (this.userData.forceQuerySearch) {
+    if (forceQuerySearch) {
     } else if (
       // prefer tvdb ID over imdb ID for series
       parsedId.mediaType === 'series' &&
@@ -104,7 +122,7 @@ export abstract class BaseNabAddon<
       queryParams.tvdbid = metadata.tvdbId.toString();
 
     if (
-      ((!this.userData.forceQuerySearch &&
+      ((!forceQuerySearch &&
         searchCapabilities.supportedParams.includes('season')) ||
         forceIncludeSeasonEpInParams.includes(
           capabilities.server.title || ''
@@ -113,7 +131,7 @@ export abstract class BaseNabAddon<
     )
       queryParams.season = parsedId.season.toString();
     if (
-      ((!this.userData.forceQuerySearch &&
+      ((!forceQuerySearch &&
         searchCapabilities.supportedParams.includes('ep')) ||
         forceIncludeSeasonEpInParams.includes(
           capabilities.server.title || ''
@@ -122,7 +140,7 @@ export abstract class BaseNabAddon<
     )
       queryParams.ep = parsedId.episode.toString();
     if (
-      !this.userData.forceQuerySearch &&
+      !forceQuerySearch &&
       searchCapabilities.supportedParams.includes('year') &&
       metadata.year &&
       parsedId.mediaType === 'movie'

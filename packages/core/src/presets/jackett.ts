@@ -103,6 +103,20 @@ export class JackettPreset extends TorznabPreset {
         ],
       },
       {
+        id: 'searchMode',
+        name: 'Search Mode',
+        description:
+          'Auto uses ID-based search first (faster and recommended). Forced Query uses broad query search (legacy compatibility mode).',
+        type: 'select',
+        required: false,
+        showInSimpleMode: false,
+        default: 'auto',
+        options: [
+          { label: 'Auto (Recommended)', value: 'auto' },
+          { label: 'Forced Query (Legacy)', value: 'query' },
+        ],
+      },
+      {
         id: 'useMultipleInstances',
         name: 'Use Multiple Instances',
         description:
@@ -155,7 +169,8 @@ export class JackettPreset extends TorznabPreset {
       apiPath: '/api',
       apiKey: jackettApiKey,
       searchTimeout: options.timeout ?? this.METADATA.TIMEOUT,
-      forceQuerySearch: true,
+      forceQuerySearch: options.searchMode === 'query',
+      legacyForceQuerySearch: options.searchMode === 'query',
     };
 
     const configString = this.base64EncodeJSON(config, 'urlSafe');
