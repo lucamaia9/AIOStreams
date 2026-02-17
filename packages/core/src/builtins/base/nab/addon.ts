@@ -153,7 +153,7 @@ export abstract class BaseNabAddon<
     }
     queryParams.extended = '1';
     const searchTimeout = this.userData.searchTimeout
-      ? Math.max(Env.MIN_TIMEOUT, this.userData.searchTimeout - 1000)
+      ? Math.max(Env.MIN_TIMEOUT, this.userData.searchTimeout - 250)
       : undefined;
     let results: SearchResultItem<A['namespace']>[] = [];
     if (queries.length > 0) {
