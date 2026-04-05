@@ -1,5 +1,25 @@
 # AIOStreams / Comet Local Changelog
 
+## 2026-04-05 -- Master Plan Cleanup: Docs, Pruning, Scripts
+
+- **Doc tree consolidation**: Copilot reorg had renamed all root-level operational
+  docs into `docs/`, breaking AGENTS.md references. Restored originals to root,
+  deleted redundant `docs/` tree (all content was duplicated).
+- **Pruning safety fix**: `daily_prune_bitmagnet.sh` now checks if the promotion
+  pipeline ran within 24h before using the 2-day retention window. Falls back to
+  3-day safety window when promotion is lagging. Prevents deleting un-promoted torrents.
+- **Script cleanup**: Archived 17 retired/dead scripts to `scripts/archived/`
+  (old backfill, matching, test, and legacy promotion scripts).
+- **New docs**: Added `PRUNING.md` (authoritative pruning runbook), updated
+  `GO_PYTHON_ALIGNMENT.md` (replaced unverified claims with actual analysis),
+  updated `scripts/README.md` (reflects current active script set).
+- **Unified classifier audit**: Confirmed the shim is NOT used by production paths.
+  `bitmagnet_smart_hint.py`, `compact_media_search.py`, and `stream_export_bitmagnet.py`
+  all import `classify_compact_row` directly from `compact_media_search`.
+- **System state**: 20 services healthy, BitMagnet actively filtering (adult_code,
+  adult_brand, cjk_adult, explicit_pattern rejections confirmed in logs), smart hint
+  Python classifier running (batches of 32, ~50% reject rate), SQLite at 8.2M rows.
+
 ## 2026-04-04 -- Comet Runtime SQLite Rebuild Tooling + Rebalance Path Fixes
 
 - Added host-safe runtime SQLite rebuild plumbing for Comet:
