@@ -1,62 +1,10 @@
-# Secrets
-*.env
-.env
-
-# Ephemeral state
-*.lock
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-
-# Test outputs
-test_runs/
-
-# Generated pipeline output
-iptv-aggregator/output/
-
-# Runtime data (Docker volumes)
-data/
-logs/
-output/
-aiometadata/
-
-# Runtime state
-bitmagnet/classifier-stack/vps/upload/extracted/*.log
-bitmagnet/classifier-stack/vps/upload/extracted/.*state.json
-bitmagnet/classifier-stack/vps/upload/extracted/full-run-strictvideo/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Node
 node_modules/
-
-# Go/binaries
-*.so
-*.exe
-
-# IDE
-.idea/
-.vscode/
-*.swp
-
-# Embedded git repos (will be submodules or separate)
-bitmagnet-media/
-cometouglas/
-iptv-addon/
-iptv-aggregator/
-
-# Service configs with secrets
-jackett/config/
-prowlarr/config/
-traefik/
-
-# Stale directories to delete
-bitmagnet.old/
-classifier/
-go/
-tmp/
-_archive-delete/
+dist/
+*.tsbuildinfo
+out/
+.next/
+next-env.d.ts
+.wrangler/
+.env
+metadata.json
+data/

@@ -1,0 +1,16 @@
+packages:
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - bcrypt
+  - bufferutil
+  - esbuild
+  - go-ptt
+  - node-datachannel
+  - protobufjs
+  - sharp
+  - sqlite3
+  - unrs-resolver
+  - utf-8-validate
+  - utp-native
