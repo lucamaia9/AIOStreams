@@ -21,6 +21,16 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
+# Add tools path for lean_media_contract (in container: /opt/bitmagnetico/tools)
+TOOLS_DIR = SCRIPT_DIR.parent / "bitmagnet-media" / "classifier"
+if TOOLS_DIR.exists() and str(TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(TOOLS_DIR))
+
+# Also try container mount path
+CONTAINER_TOOLS = Path("/opt/bitmagnetico/tools")
+if CONTAINER_TOOLS.exists() and str(CONTAINER_TOOLS) not in sys.path:
+    sys.path.insert(0, str(CONTAINER_TOOLS))
+
 from lib.classifier_runtime import bootstrap_classifier_runtime
 
 RUNTIME_PATHS = bootstrap_classifier_runtime(__file__)
