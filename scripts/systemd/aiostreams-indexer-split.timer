@@ -1,0 +1,10 @@
+[Unit]
+Description=Weekly AIOStreams indexer split refresh
+
+[Timer]
+OnCalendar=Sun *-*-* 03:00:00 UTC
+Persistent=true
+Unit=aiostreams-indexer-split.service
+
+[Install]
+WantedBy=timers.target

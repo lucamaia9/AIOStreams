@@ -1,0 +1,261 @@
+{
+  "sourceRun": "test_runs/dht_large_smoke_20260401_123942/full_run",
+  "sourceArtifacts": {
+    "largeSmokeSummary": "test_runs/dht_large_smoke_20260401_123942/full_run/large_smoke_summary.json",
+    "anomalySummary": "test_runs/dht_large_smoke_20260401_123942/full_run/large_smoke_anomaly_summary.json",
+    "manualFindings": "test_runs/dht_large_smoke_20260401_123942/full_run/manual_audit/manual_audit_findings.json",
+    "manualSamples": "test_runs/dht_large_smoke_20260401_123942/full_run/manual_audit/manual_audit_samples.jsonl",
+    "manualFocus": "test_runs/dht_large_smoke_20260401_123942/full_run/manual_audit/manual_audit_anomaly_focus.jsonl"
+  },
+  "largeSmokeHeadline": {
+    "corpusRows": 10450,
+    "failureRows": 1438,
+    "contentIdMatchRate": 77.5,
+    "lookupMatchRate": 88.83,
+    "failureBuckets": {
+      "review_expected_but_resolved": 636,
+      "expected_id_missing": 493,
+      "no_baseline_needs_lookup": 182,
+      "no_baseline_rejected": 100,
+      "content_id_mismatch": 24,
+      "type_mismatch": 3
+    }
+  },
+  "bucketClassification": {
+    "review_expected_but_resolved": {
+      "count": 636,
+      "classification": "baseline-data",
+      "priority": "P3",
+      "summary": "Mostly healthy auto-resolutions where the classifier attached an obvious title directly; treat as baseline under-labeling noise, not a blocker.",
+      "representativeSamples": [
+        8800,
+        6735
+      ]
+    },
+    "expected_id_missing": {
+      "count": 493,
+      "classification": "canonical-matching",
+      "priority": "P0",
+      "summary": "Rows already carrying authoritative IDs in the baseline are still dropping into lookup because canonical/series matching misses them.",
+      "representativeSamples": [
+        1430,
+        2646,
+        2770,
+        5829,
+        7286,
+        7469,
+        9037
+      ]
+    },
+    "content_id_mismatch": {
+      "count": 24,
+      "classification": "mixed",
+      "priority": "P0",
+      "summary": "A small but high-signal set: some are real matcher bugs, some are guardrail misses, and a large share are polluted baseline IDs.",
+      "representativeSamples": [
+        427,
+        7210,
+        8761,
+        8882,
+        9329
+      ]
+    },
+    "type_mismatch": {
+      "count": 3,
+      "classification": "mixed",
+      "priority": "P1",
+      "summary": "Manual review says 2/3 are baseline type pollution and 1/3 is a real classifier drift.",
+      "representativeSamples": [
+        2829,
+        4180,
+        7466
+      ]
+    },
+    "no_baseline_needs_lookup": {
+      "count": 182,
+      "classification": "mixed",
+      "priority": "P1",
+      "summary": "Most rows simply lack baseline labels, but sampled anomalies show that guardrail leakage hides in this bucket.",
+      "representativeSamples": [
+        30,
+        215,
+        6879,
+        8601
+      ]
+    },
+    "no_baseline_rejected": {
+      "count": 100,
+      "classification": "guardrail-success",
+      "priority": "P3",
+      "summary": "Sampled rejects looked justified; keep this as a non-regression safety bucket rather than a fix target.",
+      "representativeSamples": [
+        213,
+        265
+      ]
+    }
+  },
+  "rootCauseGroups": [
+    {
+      "id": "canonical-title-normalization-gap",
+      "track": "canonical-matching",
+      "priority": "P0",
+      "candidateBucketSize": 493,
+      "summary": "Canonical lookup is missing obvious known titles when site tags, punctuation, localized text, or extra subtitle text stay in the title candidate.",
+      "representativeSamples": [
+        1430,
+        2770,
+        5829,
+        6688,
+        7286,
+        7469,
+        9037
+      ],
+      "suggestedFollowups": [
+        "Tighten shared_series_parser and movie-title candidate cleanup before index lookup.",
+        "Expand series/movie alt-title coverage for localized/transliterated names before punting to needsTmdbLookup.",
+        "Add prefix/alias fallback only after stronger normalization, so obvious canonical families resolve without broad false positives."
+      ]
+    },
+    {
+      "id": "movie-title-collision-and-year-drift",
+      "track": "canonical-matching",
+      "priority": "P0",
+      "bucketSize": 24,
+      "manualBreakdown": {
+        "mostlyBaselineWrongExamples": [
+          1918,
+          2441,
+          3389,
+          5261,
+          6372,
+          7199,
+          7983,
+          8267,
+          9368
+        ],
+        "clearClassifierWrongExamples": [
+          427,
+          4198,
+          7624,
+          7820,
+          9122,
+          9329
+        ],
+        "grossOffDomainExamples": [
+          8761,
+          8882
+        ],
+        "ambiguousDuplicateTitleExamples": [
+          6345,
+          6651,
+          9463
+        ],
+        "remainingMixedExamples": 4
+      },
+      "summary": "Generic movie titles are being resolved by weak title/year/popularity signals, producing wrong exact IDs instead of deferring or finding the correct family.",
+      "representativeSamples": [
+        427,
+        4198,
+        7210,
+        7624,
+        8267,
+        9329
+      ],
+      "suggestedFollowups": [
+        "Use stronger disambiguation for same-title same-year collisions (IMDb/original-title evidence when available).",
+        "Penalize weak popularity-only wins for generic one-word/two-word titles.",
+        "Prefer lookup over a low-confidence exact ID when the normalized title is highly ambiguous."
+      ]
+    },
+    {
+      "id": "guardrail-noncanonical-acceptance",
+      "track": "guardrail",
+      "priority": "P0",
+      "manualLowerBounds": {
+        "obviousAdultAcceptedLowerBound": 87,
+        "obviousSoftwareAcceptedLowerBound": 2,
+        "obviousSportsAcceptedLowerBound": 32,
+        "obviousAnimeBatchOrOVAAcceptedAsMovieLowerBound": 108,
+        "note": "These are conservative keyword heuristics over the 10,450-row run, not gold-label counts."
+      },
+      "summary": "Obvious courseware, adult previews, and sports/event dumps are surviving as movie rows instead of being rejected or fenced off before canonical matching.",
+      "representativeSamples": [
+        215,
+        8761,
+        8882,
+        8601
+      ],
+      "suggestedFollowups": [
+        "Broaden courseware/topic detection beyond English-only brand lists.",
+        "Add sports/event pack rejection or separate non-canonical sink before movie matching.",
+        "Tighten adult-preview leakage checks on teaser/preview-style payloads that still carry a single MP4."
+      ]
+    },
+    {
+      "id": "anime-tv-structure-routed-as-movie",
+      "track": "guardrail",
+      "priority": "P1",
+      "manualLowerBound": {
+        "obviousAnimeBatchOrOVAAcceptedAsMovieLowerBound": 108
+      },
+      "summary": "Anime episode/batch structures are sometimes slipping into the movie path, which then either misses or attaches the wrong franchise.",
+      "representativeSamples": [
+        30,
+        1616,
+        7466
+      ],
+      "suggestedFollowups": [
+        "Strengthen anime episode/batch detection before movie fallback.",
+        "Keep anime collections in TV/anime_pack handling even when extras or CD folders are present."
+      ]
+    },
+    {
+      "id": "baseline-polluted-tmdb-link",
+      "track": "baseline-data",
+      "priority": "P1",
+      "summary": "Some exact-ID baseline rows are plainly wrong on title evidence, so they should be excluded from regression expectations until the source data is cleaned.",
+      "representativeSamples": [
+        8185,
+        5933,
+        1918,
+        2441,
+        3389
+      ],
+      "excludedFromRegressionFixtures": [
+        8185,
+        5933
+      ]
+    },
+    {
+      "id": "baseline-polluted-type-expectation",
+      "track": "baseline-data",
+      "priority": "P1",
+      "summary": "Two of the three type mismatches are baseline mistakes where anime packs were labeled as movies; they are useful audit examples but not product regressions.",
+      "representativeSamples": [
+        2829,
+        4180
+      ],
+      "excludedFromRegressionFixtures": [
+        2829,
+        4180
+      ]
+    },
+    {
+      "id": "review-bucket-auto-resolution-noise",
+      "track": "baseline-data",
+      "priority": "P3",
+      "summary": "This bucket mostly shows that the baseline still expects manual review even when the current classifier can resolve obvious titles cleanly.",
+      "representativeSamples": [
+        8800,
+        6735
+      ]
+    }
+  ],
+  "highestPriorityFixBuckets": [
+        "canonical-title-normalization-gap",
+    "movie-title-collision-and-year-drift",
+    "guardrail-noncanonical-acceptance",
+    "anime-tv-structure-routed-as-movie"
+  ],
+  "regressionFixture": "tests/dht_pipeline/samples/large_smoke_regression_cases.jsonl"
+}

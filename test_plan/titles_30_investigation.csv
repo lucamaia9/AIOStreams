@@ -1,0 +1,31 @@
+slot,category,media_type,imdb_id,title_hint
+1,movies_old,movie,tt0034583,casablanca
+2,movies_old,movie,tt0050083,12 angry men
+3,movies_mid,movie,tt0111161,the shawshank redemption
+4,movies_mid,movie,tt0133093,the matrix
+5,movies_mid,movie,tt0468569,the dark knight
+6,movies_new,movie,tt1517268,barbie
+7,movies_new,movie,tt15398776,oppenheimer
+8,movies_new,movie,tt9362722,spider man across the spider verse
+9,mixed_edge,movie,tt1187043,3 idiots
+10,mixed_edge,movie,tt5074352,dangal
+11,series_old,series,tt0903747:1:1,breaking bad s01e01
+12,series_old,series,tt0306414:1:1,the wire s01e01
+13,series_mid,series,tt0944947:1:1,game of thrones s01e01
+14,series_mid,series,tt4574334:1:1,stranger things s01e01
+15,series_new,series,tt6473344:1:1,the last of us s01e01
+16,series_new,series,tt0388629:1:2,one piece live action s01e02
+17,series_new,series,tt13622776:1:1,the bear s01e01
+18,mixed_edge,series,tt15262254:1:1,shogun s01e01
+19,anime_old,series,tt0807832:1:1,death note s01e01
+20,anime_old,series,tt0421357:1:1,naruto s01e01
+21,anime_mid,series,tt0988824:1:1,attack on titan s01e01
+22,anime_mid,series,tt1355642:1:1,fullmetal alchemist brotherhood s01e01
+23,anime_new,series,tt9335498:1:1,demon slayer s01e01
+24,anime_new,series,tt10628692:1:1,jujutsu kaisen s01e01
+25,anime_new,series,tt26229860:1:1,solo leveling s01e01
+26,mixed_edge,series,tt13622782:1:1,moon knight s01e01
+27,movies_new,movie,tt8503618,hamilton
+28,series_mid,series,tt7366338:1:1,chernobyl s01e01
+29,anime_mid,series,tt7222086:1:1,violet evergarden s01e01
+30,movies_old,movie,tt0041959,the third man

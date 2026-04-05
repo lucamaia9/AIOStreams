@@ -1,0 +1,91 @@
+slot,category,media_type,imdb_id,series_ref,title_hint,year_bucket,priority
+1,movies_old,movie,tt0034583,,casablanca,1940s,p1
+2,movies_old,movie,tt0041959,,the third man,1940s,p2
+3,movies_old,movie,tt0050083,,12 angry men,1950s,p1
+4,movies_old,movie,tt0052357,,vertigo,1950s,p2
+5,movies_old,movie,tt0060196,,the good the bad and the ugly,1960s,p1
+6,movies_old,movie,tt0066921,,a clockwork orange,1970s,p2
+7,movies_old,movie,tt0071562,,the godfather part ii,1970s,p1
+8,movies_old,movie,tt0073486,,one flew over the cuckoos nest,1970s,p2
+9,movies_old,movie,tt0083658,,blade runner,1980s,p1
+10,movies_mid,movie,tt0107290,,jurassic park,1990s,p1
+11,movies_mid,movie,tt0110912,,pulp fiction,1990s,p1
+12,movies_mid,movie,tt0111161,,the shawshank redemption,1990s,p1
+13,movies_mid,movie,tt0114369,,se7en,1990s,p2
+14,movies_mid,movie,tt0133093,,the matrix,1990s,p1
+15,movies_mid,movie,tt0167260,,the lord of the rings the return of the king,2000s,p1
+16,movies_mid,movie,tt0172495,,gladiator,2000s,p2
+17,movies_mid,movie,tt0361748,,inglourious basterds,2000s,p2
+18,movies_mid,movie,tt0468569,,the dark knight,2000s,p1
+19,movies_new,movie,tt0816692,,interstellar,2010s,p1
+20,movies_new,movie,tt1375666,,inception,2010s,p1
+21,movies_new,movie,tt4154796,,avengers endgame,2010s,p1
+22,movies_new,movie,tt6751668,,parasite,2010s,p2
+23,movies_new,movie,tt7131622,,once upon a time in hollywood,2010s,p2
+24,movies_new,movie,tt7286456,,joker,2010s,p2
+25,movies_new,movie,tt9362722,,spider man across the spider verse,2020s,p1
+26,movies_new,movie,tt15398776,,oppenheimer,2020s,p1
+27,movies_new,movie,tt1517268,,barbie,2020s,p2
+28,series_old,series,tt0903747:1:1,tt0903747,breaking bad s01e01,2000s,p1
+29,series_old,series,tt0141842:1:1,tt0141842,the sopranos s01e01,1990s,p1
+30,series_old,series,tt0306414:1:1,tt0306414,the wire s01e01,2000s,p1
+31,series_old,series,tt0411008:1:1,tt0411008,lost s01e01,2000s,p2
+32,series_old,series,tt0386676:1:1,tt0386676,the office us s01e01,2000s,p2
+33,series_old,series,tt0285331:1:1,tt0285331,24 s01e01,2000s,p3
+34,series_old,series,tt0185906:1:1,tt0185906,band of brothers s01e01,2000s,p2
+35,series_old,series,tt0098936:1:1,tt0098936,twin peaks s01e01,1990s,p3
+36,series_old,series,tt0108778:1:1,tt0108778,friends s01e01,1990s,p2
+37,series_mid,series,tt0944947:1:1,tt0944947,game of thrones s01e01,2010s,p1
+38,series_mid,series,tt1190634:1:1,tt1190634,the boys s01e01,2010s,p1
+39,series_mid,series,tt1475582:1:1,tt1475582,sherlock s01e01,2010s,p2
+40,series_mid,series,tt1856010:1:1,tt1856010,house of cards s01e01,2010s,p3
+41,series_mid,series,tt7366338:1:1,tt7366338,chernobyl s01e01,2010s,p1
+42,series_mid,series,tt4574334:1:1,tt4574334,stranger things s01e01,2010s,p1
+43,series_mid,series,tt2085059:1:1,tt2085059,black mirror s01e01,2010s,p2
+44,series_mid,series,tt2306299:1:1,tt2306299,vikings s01e01,2010s,p2
+45,series_mid,series,tt1632701:1:1,tt1632701,suits s01e01,2010s,p3
+46,series_new,series,tt2861424:1:1,tt2861424,rick and morty s01e01,2010s,p1
+47,series_new,series,tt9140560:1:1,tt9140560,wandavision s01e01,2020s,p2
+48,series_new,series,tt11198330:1:1,tt11198330,house of the dragon s01e01,2020s,p1
+49,series_new,series,tt8772296:1:1,tt8772296,euphoria s01e01,2010s,p2
+50,series_new,series,tt13622776:1:1,tt13622776,the bear s01e01,2020s,p2
+51,series_new,series,tt0388629:1:1,tt0388629,one piece live action s01e01,2020s,p1
+52,series_new,series,tt6473344:1:1,tt6473344,the last of us s01e01,2020s,p1
+53,series_new,series,tt14586350:1:1,tt14586350,the white lotus s01e01,2020s,p2
+54,series_new,series,tt9742936:1:1,tt9742936,squid game s01e01,2020s,p1
+55,anime_old,series,tt0213338:1:1,tt0213338,cowboy bebop s01e01,1990s,p1
+56,anime_old,series,tt0245429:1:1,tt0245429,spirited away,2000s,p1
+57,anime_old,series,tt0096697:1:1,tt0096697,dragon ball z s01e01,1990s,p2
+58,anime_old,series,tt0098938:1:1,tt0098938,ranma one half s01e01,1980s,p3
+59,anime_old,series,tt0807832:1:1,tt0807832,death note s01e01,2000s,p1
+60,anime_old,series,tt0159206:1:1,tt0159206,neon genesis evangelion s01e01,1990s,p2
+61,anime_old,series,tt0434665:1:1,tt0434665,bleach s01e01,2000s,p2
+62,anime_old,series,tt0303461:1:1,tt0303461,inuyasha s01e01,2000s,p3
+63,anime_old,series,tt0421357:1:1,tt0421357,naruto s01e01,2000s,p1
+64,anime_mid,series,tt1355642:1:1,tt1355642,fullmetal alchemist brotherhood s01e01,2000s,p1
+65,anime_mid,series,tt0988824:1:1,tt0988824,attack on titan s01e01,2010s,p1
+66,anime_mid,series,tt1910272:1:1,tt1910272,one punch man s01e01,2010s,p2
+67,anime_mid,series,tt2560140:1:1,tt2560140,my hero academia s01e01,2010s,p2
+68,anime_mid,series,tt5626028:1:1,tt5626028,your name,2010s,p1
+69,anime_mid,series,tt5323662:1:1,tt5323662,re zero s01e01,2010s,p2
+70,anime_mid,series,tt3398228:1:1,tt3398228,haikyuu s01e01,2010s,p3
+71,anime_mid,series,tt4508902:1:1,tt4508902,erased s01e01,2010s,p3
+72,anime_mid,series,tt7222086:1:1,tt7222086,violet evergarden s01e01,2010s,p2
+73,anime_new,series,tt9335498:1:1,tt9335498,demon slayer s01e01,2010s,p1
+74,anime_new,series,tt10628692:1:1,tt10628692,jujutsu kaisen s01e01,2020s,p1
+75,anime_new,series,tt21209876:1:1,tt21209876,chainsaw man s01e01,2020s,p1
+76,anime_new,series,tt13616990:1:1,tt13616990,spy x family s01e01,2020s,p2
+77,anime_new,series,tt13706018:1:1,tt13706018,arcane s01e01,2020s,p1
+78,anime_new,series,tt13756484:1:1,tt13756484,blue lock s01e01,2020s,p2
+79,anime_new,series,tt1520211:1:1,tt1520211,vinland saga s01e01,2010s,p2
+80,anime_new,series,tt26229860:1:1,tt26229860,solo leveling s01e01,2020s,p1
+81,anime_new,series,tt1541160:1:1,tt1541160,dan da dan s01e01,2020s,p3
+82,mixed_edge,movie,tt0114709,,toy story,1990s,p3
+83,mixed_edge,movie,tt0848228,,the avengers,2010s,p2
+84,mixed_edge,movie,tt8503618,,hamilton,2020s,p3
+85,mixed_edge,series,tt13622782:1:1,tt13622782,moon knight s01e01,2020s,p3
+86,mixed_edge,series,tt0386676:2:1,tt0386676,the office us s02e01,2000s,p3
+87,mixed_edge,series,tt0388629:1:2,tt0388629,one piece live action s01e02,2020s,p3
+88,mixed_edge,movie,tt1187043,,3 idiots,2000s,p2
+89,mixed_edge,movie,tt5074352,,dangal,2010s,p2
+90,mixed_edge,series,tt15262254:1:1,tt15262254,shogun s01e01,2020s,p1

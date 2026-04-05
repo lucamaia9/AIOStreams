@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  telegram-scraper:
+    build: .
+    container_name: telegram-scraper
+    volumes:
+      - ./output:/app/output
+      - ./config.env:/app/config.env:ro
+    env_file:
+      - ./config.env
+    environment:
+      - OUTPUT_DIR=/app/output
+    restart: unless-stopped

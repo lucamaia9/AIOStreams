@@ -1,0 +1,8 @@
+[Unit]
+Description=Telegram IPTV refresh pipeline
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/aiostreams/telegram-scraper
+ExecStartPre=/usr/bin/docker build -t telegram-scraper .
+ExecStart=/home/ubuntu/aiostreams/scripts/run_iptv_refresh_pipeline.sh

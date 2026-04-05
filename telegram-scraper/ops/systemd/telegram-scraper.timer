@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Telegram IPTV refresh pipeline at 01:00 and 13:00 UTC
+
+[Timer]
+OnCalendar=*-*-* 01:00:00
+OnCalendar=*-*-* 13:00:00
+Persistent=true
+Unit=telegram-scraper.service
+
+[Install]
+WantedBy=timers.target

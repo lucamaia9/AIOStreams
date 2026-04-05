@@ -1,0 +1,13 @@
+[Unit]
+Description=AIOStreams indexer split build/publish
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/ubuntu/aiostreams
+ExecStart=/home/ubuntu/aiostreams/scripts/run_indexer_split.sh --with-overnight --apply
+Nice=10
+
+[Install]
+WantedBy=default.target
