@@ -1,8 +1,8 @@
 #!/bin/bash
 # Daily BitMagnet Prune Script
-# - Cleans processed queue jobs
-# - Prunes torrents exported to SQLite > 24h ago
-# - Runs VACUUM ANALYZE on large tables
+# - Cleans processed queue jobs (7 days)
+# - Prunes torrents older than 2 days (time-based retention)
+# - Runs VACUUM FULL ANALYZE to reclaim space
 
 set -euo pipefail
 
@@ -31,23 +31,18 @@ WHERE status IN ('processed', 'failed')
 AND ran_at < NOW() - INTERVAL '7 days';
 " >> "$LOG_FILE" 2>&1
 
-# Prune exported torrents (> 24h ago)
-log "Pruning exported torrents..."
+# Prune torrents by creation time (2-day retention)
+log "Pruning torrents older than 2 days..."
 sudo docker compose exec -T bitmagnet-postgres psql -U postgres -d bitmagnet -c "
-DELETE FROM torrents 
-WHERE info_hash IN (
-  SELECT info_hash 
-  FROM torrent_contents 
-  WHERE exported = true 
-  AND exported_at < NOW() - INTERVAL '24 hours'
-);
+DELETE FROM torrents WHERE created_at < NOW() - INTERVAL '2 days';
+DELETE FROM torrent_files WHERE torrent_id NOT IN (SELECT id FROM torrents);
 " >> "$LOG_FILE" 2>&1
 
-# Vacuum analyze
-log "Running VACUUM ANALYZE..."
+# Vacuum analyze (reclaim space)
+log "Running VACUUM FULL ANALYZE..."
 sudo docker compose exec -T bitmagnet-postgres psql -U postgres -d bitmagnet << 'EOSQL' >> "$LOG_FILE" 2>&1
-VACUUM ANALYZE torrents;
-VACUUM ANALYZE torrent_files;
+VACUUM FULL ANALYZE torrents;
+VACUUM FULL ANALYZE torrent_files;
 VACUUM ANALYZE torrent_contents;
 EOSQL
 
@@ -61,8 +56,8 @@ SELECT 'Pending Match', COUNT(*)::text FROM torrent_contents
 UNION ALL
 SELECT 'Matched (TMDB)', COUNT(*)::text FROM torrent_contents WHERE content_source = 'tmdb'
 UNION ALL
-SELECT 'Exported Pending Prune', COUNT(*)::text FROM torrent_contents 
-  WHERE exported = true AND exported_at < NOW() - INTERVAL '24 hours';
+SELECT 'Torrents < 2 days', COUNT(*)::text FROM torrents
+  WHERE created_at >= NOW() - INTERVAL '2 days';
 " >> "$LOG_FILE" 2>&1
 
 log "=== Prune complete ==="
