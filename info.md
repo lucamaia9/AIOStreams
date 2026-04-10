@@ -1,5 +1,24 @@
 # AIOStreams / Comet Local Changelog
 
+## 2026-04-10 -- FlareSolverr Zombie Chromium Process Fix
+
+- **Root cause**: All 4 FlareSolverr containers lacked session TTL and media
+  disable env vars. The OpenClaw rent-scraper sends stateless `request.get`
+  calls (no session reuse), spawning a new browser per page. When Chrome
+  crashes (tab crashed, timeout, OOM), child processes become `<defunct>`
+  zombies. Measured 43 zombies in `flaresolverr` after ~14h uptime.
+- **Container hardening** (compose.yaml): Added `MAX_TIMEOUT=45000`,
+  `SESSION_TIMEOUT_MINUTES=15`, and `DISABLE_MEDIA=true` to all 4
+  FlareSolverr services (flaresolverr, flaresolverr-jackett,
+  flaresolverr-prowlarr, flaresolverr-helsinki).
+- **Client fix** (OpenClaw gateway): Added `session_ttl_minutes: 15` to
+  every FlareSolverr request payload. Added `close()` method to
+  `FlareSolverrClient`. Updated `AntiBotFetcher.close()` to also close
+  the antibot client when present.
+- **Maintenance hook**: Added FlareSolverr restart to
+  `scripts/maintenance/safe-maintenance.sh` (runs daily at 03:20 UTC via
+  `host-maintenance.timer`). Safety net for any zombies that slip through.
+
 ## 2026-04-05 -- Master Plan Cleanup: Docs, Pruning, Scripts
 
 - **Doc tree consolidation**: Copilot reorg had renamed all root-level operational
@@ -19,6 +38,44 @@
 - **System state**: 20 services healthy, BitMagnet actively filtering (adult_code,
   adult_brand, cjk_adult, explicit_pattern rejections confirmed in logs), smart hint
   Python classifier running (batches of 32, ~50% reject rate), SQLite at 8.2M rows.
+
+## 2026-04-05 -- Phase 4: Filter Validation, Automation, Scheduling
+
+- **Go unit tests**: 24/24 pass, benchmark 169μs/op, 142 B/op, 2 allocs/op.
+  Fixed 3 test expectation mismatches (reason strings in intake_filter_test.go).
+- **Consistency test fixed**: `test_go_python_consistency.py` was using `sqlite3.connect()`
+  with a PostgreSQL connection string (fatal bug). Rewrote to query PostgreSQL via
+  `docker exec bitmagnet-postgres psql --csv`. Added `AIOSTREAMS_ROOT` env var for
+  scripts in `scripts/testing/` subdirectory.
+- **Consistency test results** (5000 sample): Go rejects 1.1%, Python rejects 55.4%,
+  agreement 44.3%. This is architecturally correct — Go is a conservative fast gate,
+  Python is the authoritative classifier. Zero false positives on valid media.
+- **Promotion automation**: Created `bitmagnet-live-promotion.service` +
+  `bitmagnet-live-promotion.timer` (systemd, every 12h). Ensures promotion runs
+  well within the 24h prune-health threshold. Logs to `logs/bitmagnet-promotion.log`.
+- **Pattern sync validation**: Created `scripts/testing/verify_pattern_sync.sh` —
+  diff-based check that detects when Python classifier patterns drift from Go patterns.
+  Updated `generate_patterns_go.py` to support `--output` and `--source` flags.
+- **Go installed**: Go 1.26.1 (arm64) now available on host via snap.
+
+## 2026-04-05 -- Phase 4: Filter Validation, Automation, Scheduling
+
+- **Go unit tests**: 24/24 pass, benchmark 169μs/op, 142 B/op, 2 allocs/op.
+  Fixed 3 test expectation mismatches (reason strings in intake_filter_test.go).
+- **Consistency test fixed**: `test_go_python_consistency.py` was using `sqlite3.connect()`
+  with a PostgreSQL connection string (fatal bug). Rewrote to query PostgreSQL via
+  `docker exec bitmagnet-postgres psql --csv`. Added `AIOSTREAMS_ROOT` env var for
+  scripts in `scripts/testing/` subdirectory.
+- **Consistency test results** (5000 sample): Go rejects 1.1%, Python rejects 55.4%,
+  agreement 44.3%. This is architecturally correct — Go is a conservative fast gate,
+  Python is the authoritative classifier. Zero false positives on valid media.
+- **Promotion automation**: Created `bitmagnet-live-promotion.service` +
+  `bitmagnet-live-promotion.timer` (systemd, every 12h). Ensures promotion runs
+  well within the 24h prune-health threshold. Logs to `logs/bitmagnet-promotion.log`.
+- **Pattern sync validation**: Created `scripts/testing/verify_pattern_sync.sh` —
+  diff-based check that detects when Python classifier patterns drift from Go patterns.
+  Updated `generate_patterns_go.py` to support `--output` and `--source` flags.
+- **Go installed**: Go 1.26.1 (arm64) now available on host via snap.
 
 ## 2026-04-04 -- Comet Runtime SQLite Rebuild Tooling + Rebalance Path Fixes
 
@@ -1397,3 +1454,10 @@ This is a chronological changelog of significant changes. For operational detail
   - rebuilds now stage under `data/comet-fresh/magnetico/rebuild-runs/<timestamp>-<label>/`, seed the live replay from the earliest raw source cursor, validate the rebuilt SQLite artifact with integrity checks, and write a resumable `live-promotion.checkpoint.json`
   - optional cutover now creates timestamped backups plus a generated rollback script before replacing the deployed artifact
   - when only a trusted historical seed DB is available, the wrapper strips any tracked live overlay and replays live rows from raw authoritative inputs instead of trusting old SQLite live state
+
+## 2026-04-05
+
+- Simplified host Node runtime management by removing `nvm` bootstrap from IPTV operational scripts and systemd unit environments.
+- IPTV operational scripts now rely on system PATH resolution for `node` and `npm`.
+- Updated systemd service ExecStart paths to the canonical IPTV script locations under `scripts/iptv/`.
+- Reloaded/restarted IPTV timers and verified `iptv-health.service` completes successfully.
