@@ -1,6 +1,8 @@
 # AIOStreams / Comet Local Changelog
 
-## 2026-04-10 -- FlareSolverr Zombie Chromium Process Fix
+## 2026-04-10 -- FlareSolverr Zombie Chromium Process Fix + Rent-Scraper Cron Recovery
+
+### FlareSolverr Zombie Fix
 
 - **Root cause**: All 4 FlareSolverr containers lacked session TTL and media
   disable env vars. The OpenClaw rent-scraper sends stateless `request.get`
@@ -18,6 +20,17 @@
 - **Maintenance hook**: Added FlareSolverr restart to
   `scripts/maintenance/safe-maintenance.sh` (runs daily at 03:20 UTC via
   `host-maintenance.timer`). Safety net for any zombies that slip through.
+
+### Rent-Scraper Cron Recovery (Zoopla + Openrent)
+
+- **Zoopla cron job** (`rent-scraper-recent-zoopla-v3`) was disabled at ~03:20 UTC,
+  causing zero zoopla scrapes for 9+ hours. Openrent-top was also disabled.
+- **Re-enabled** both jobs via `openclaw cron edit <uuid> --enable`.
+- **Set explicit timeouts**: zoopla 1800s (30 min), rightmove 900s (15 min),
+  openrent-top 900s, openrent-deep 900s, provider-reconcile 1800s.
+- **Added failure alerts** (`--failure-alert-after 3`) to all 5 jobs.
+  Alerts fire after 3 consecutive errors instead of silently accumulating.
+- **Verified**: Manual zoopla run succeeded — 45 new listings found, enriched 6.
 
 ## 2026-04-05 -- Master Plan Cleanup: Docs, Pruning, Scripts
 
