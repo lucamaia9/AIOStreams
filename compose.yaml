@@ -66,7 +66,8 @@ services:
       - ./bitmagnet-media/runtime/data:/root/.local/share/bitmagnet
       - ./bitmagnet-media/classifier:/opt/bitmagnetico/tools:ro
       - ./scripts:/opt/bitmagnetico/scripts:ro
-      - ./data/comet-fresh/magnetico/active.search.sqlite3:/data/canonical.sqlite3
+      - ./data/comet-fresh/magnetico/active.search.sqlite3:/data/canonical.sqlite3:ro
+      - ./data/tmdb:/opt/data/tmdb
     networks:
       - vpn-net
     ports:
@@ -119,10 +120,9 @@ services:
     build: ./vpn-proxy
     container_name: adguard-proxy-helsinki
     restart: unless-stopped
+    init: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
     env_file:
       - ./config/adguard-proxy-helsinki.env
     environment:
@@ -131,27 +131,28 @@ services:
       - VPN_RETRY_DELAY=10
     volumes:
       - ./certs/comodo_helsinki.crt:/etc/ipsec.d/cacerts/comodo.crt:ro
+      - ./certs/ZeroSSLRSADVSSLCA2.crt:/etc/ipsec.d/cacerts/zerossl_rsa_dv_ssl_ca_2.crt:ro
+      - ./certs/SectigoPublicServerAuthenticationRootR46.crt:/etc/ipsec.d/cacerts/sectigo_root_r46.crt:ro
     networks:
       vpn-net:
         ipv4_address: 172.22.250.2
     healthcheck:
-      test: ["CMD-SHELL", "ipsec status | grep -q ESTABLISHED && curl -sS --max-time 3 http://localhost:8888 >/dev/null"]
+      test: ["CMD-SHELL", "curl -sS --max-time 3 http://localhost:8888 >/dev/null 2>&1 && ipsec status | grep -q ESTABLISHED"]
       interval: 30s
       timeout: 8s
       retries: 5
       start_period: 120s
     cpus: "0.25"
-    mem_limit: "96m"
-    pids_limit: 128
+    mem_limit: "128m"
+    pids_limit: 256
 
   adguard-proxy-amsterdam:
     build: ./vpn-proxy
     container_name: adguard-proxy-amsterdam
     restart: unless-stopped
+    init: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
     env_file:
       - ./config/adguard-proxy-amsterdam.env
     environment:
@@ -160,27 +161,28 @@ services:
       - VPN_RETRY_DELAY=10
     volumes:
       - ./certs/comodo_amsterdam.crt:/etc/ipsec.d/cacerts/comodo.crt:ro
+      - ./certs/ZeroSSLRSADVSSLCA2.crt:/etc/ipsec.d/cacerts/zerossl_rsa_dv_ssl_ca_2.crt:ro
+      - ./certs/SectigoPublicServerAuthenticationRootR46.crt:/etc/ipsec.d/cacerts/sectigo_root_r46.crt:ro
     networks:
       vpn-net:
         ipv4_address: 172.22.250.3
     healthcheck:
-      test: ["CMD-SHELL", "ipsec status | grep -q ESTABLISHED && curl -sS --max-time 3 http://localhost:8888 >/dev/null"]
+      test: ["CMD-SHELL", "curl -sS --max-time 3 http://localhost:8888 >/dev/null 2>&1 && ipsec status | grep -q ESTABLISHED"]
       interval: 30s
       timeout: 8s
       retries: 5
       start_period: 120s
     cpus: "0.25"
-    mem_limit: "96m"
-    pids_limit: 128
+    mem_limit: "128m"
+    pids_limit: 256
 
   adguard-proxy-london:
     build: ./vpn-proxy
     container_name: adguard-proxy-london
     restart: unless-stopped
+    init: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
     env_file:
       - ./config/adguard-proxy-london.env
     environment:
@@ -189,27 +191,28 @@ services:
       - VPN_RETRY_DELAY=10
     volumes:
       - ./certs/comodo_london.crt:/etc/ipsec.d/cacerts/comodo.crt:ro
+      - ./certs/ZeroSSLRSADVSSLCA2.crt:/etc/ipsec.d/cacerts/zerossl_rsa_dv_ssl_ca_2.crt:ro
+      - ./certs/SectigoPublicServerAuthenticationRootR46.crt:/etc/ipsec.d/cacerts/sectigo_root_r46.crt:ro
     networks:
       vpn-net:
         ipv4_address: 172.22.250.4
     healthcheck:
-      test: ["CMD-SHELL", "ipsec status | grep -q ESTABLISHED && curl -sS --max-time 3 http://localhost:8888 >/dev/null"]
+      test: ["CMD-SHELL", "curl -sS --max-time 3 http://localhost:8888 >/dev/null 2>&1 && ipsec status | grep -q ESTABLISHED"]
       interval: 30s
       timeout: 8s
       retries: 5
       start_period: 120s
     cpus: "0.25"
-    mem_limit: "96m"
-    pids_limit: 128
+    mem_limit: "128m"
+    pids_limit: 256
 
   adguard-proxy-nyc:
     build: ./vpn-proxy
     container_name: adguard-proxy-nyc
     restart: unless-stopped
+    init: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
     env_file:
       - ./config/adguard-proxy-nyc.env
     environment:
@@ -218,18 +221,50 @@ services:
       - VPN_RETRY_DELAY=10
     volumes:
       - ./certs/comodo_nyc.crt:/etc/ipsec.d/cacerts/comodo.crt:ro
+      - ./certs/ZeroSSLRSADVSSLCA2.crt:/etc/ipsec.d/cacerts/ZeroSSLRSADVSSLCA2.crt:ro
+      - ./certs/SectigoPublicServerAuthenticationRootR46.crt:/etc/ipsec.d/cacerts/SectigoPublicServerAuthenticationRootR46.crt:ro
     networks:
       vpn-net:
         ipv4_address: 172.22.250.5
     healthcheck:
-      test: ["CMD-SHELL", "ipsec status | grep -q ESTABLISHED && curl -sS --max-time 3 http://localhost:8888 >/dev/null"]
+      test: ["CMD-SHELL", "curl -sS --max-time 3 http://localhost:8888 >/dev/null 2>&1 && ipsec status | grep -q ESTABLISHED"]
       interval: 30s
       timeout: 8s
       retries: 5
       start_period: 120s
     cpus: "0.25"
-    mem_limit: "96m"
-    pids_limit: 128
+    mem_limit: "128m"
+    pids_limit: 256
+
+  adguard-proxy-frankfurt:
+    build: ./vpn-proxy
+    container_name: adguard-proxy-frankfurt
+    restart: unless-stopped
+    init: true
+    cap_add:
+      - NET_ADMIN
+    env_file:
+      - ./config/adguard-proxy-frankfurt.env
+    environment:
+      - VPN_WAIT_TIMEOUT=60
+      - VPN_BOOT_MAX_ATTEMPTS=5
+      - VPN_RETRY_DELAY=10
+    volumes:
+      - ./certs/comodo_frankfurt.crt:/etc/ipsec.d/cacerts/comodo.crt:ro
+      - ./certs/ZeroSSLRSADVSSLCA2.crt:/etc/ipsec.d/cacerts/zerossl_rsa_dv_ssl_ca_2.crt:ro
+      - ./certs/SectigoPublicServerAuthenticationRootR46.crt:/etc/ipsec.d/cacerts/sectigo_root_r46.crt:ro
+    networks:
+      vpn-net:
+        ipv4_address: 172.22.250.6
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sS --max-time 3 http://localhost:8888 >/dev/null 2>&1 && ipsec status | grep -q ESTABLISHED"]
+      interval: 30s
+      timeout: 8s
+      retries: 5
+      start_period: 120s
+    cpus: "0.25"
+    mem_limit: "128m"
+    pids_limit: 256
 
   aiostreams:
     image: ghcr.io/viren070/aiostreams:latest
@@ -407,7 +442,7 @@ services:
     pids_limit: 384
 
   flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
     container_name: flaresolverr
     init: true
     environment:
@@ -415,10 +450,8 @@ services:
     - LOG_HTML=false
     - CAPTCHA_SOLVER=none
     - TZ=Europe/London
-    - BROWSER_TIMEOUT=120000
-    - MAX_TIMEOUT=45000
-    - SESSION_TIMEOUT_MINUTES=15
     - DISABLE_MEDIA=true
+    - PROMETHEUS_ENABLED=true
     - NO_PROXY=localhost,127.0.0.1,jackett,flaresolverr,flaresolverr-jackett,flaresolverr-prowlarr,flaresolverr-helsinki,prowlarr,comet,aiostreams
     - no_proxy=localhost,127.0.0.1,jackett,flaresolverr,flaresolverr-jackett,flaresolverr-prowlarr,flaresolverr-helsinki,prowlarr,comet,aiostreams
     networks:
@@ -431,11 +464,38 @@ services:
       retries: 3
       start_period: 10s
     cpus: "1.00"
-    mem_limit: "512m"
+    mem_limit: "768m"
+    memswap_limit: "768m"
     pids_limit: 384
 
+  flaresolverr-rent:
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
+    container_name: flaresolverr-rent
+    init: true
+    environment:
+    - LOG_LEVEL=info
+    - LOG_HTML=false
+    - CAPTCHA_SOLVER=none
+    - TZ=Europe/London
+    - DISABLE_MEDIA=true
+    - PROMETHEUS_ENABLED=true
+    networks:
+      - vpn-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8191"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    shm_size: "64m"
+    cpus: "1.00"
+    mem_limit: "1536m"
+    memswap_limit: "1536m"
+    pids_limit: 512
+
   flaresolverr-jackett:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
     container_name: flaresolverr-jackett
     init: true
     environment:
@@ -443,9 +503,6 @@ services:
     - LOG_HTML=false
     - CAPTCHA_SOLVER=none
     - TZ=Europe/London
-    - BROWSER_TIMEOUT=120000
-    - MAX_TIMEOUT=45000
-    - SESSION_TIMEOUT_MINUTES=15
     - DISABLE_MEDIA=true
     networks:
       - vpn-net
@@ -461,7 +518,7 @@ services:
     pids_limit: 384
 
   flaresolverr-prowlarr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
     container_name: flaresolverr-prowlarr
     init: true
     environment:
@@ -469,15 +526,17 @@ services:
     - LOG_HTML=false
     - CAPTCHA_SOLVER=none
     - TZ=Europe/London
-    - BROWSER_TIMEOUT=120000
-    - MAX_TIMEOUT=45000
-    - SESSION_TIMEOUT_MINUTES=15
     - DISABLE_MEDIA=true
-    - NO_PROXY=localhost,127.0.0.1,prowlarr,flaresolverr,flaresolverr-jackett,flaresolverr-prowlarr,flaresolverr-helsinki,adguard-proxy-london
-    - no_proxy=localhost,127.0.0.1,prowlarr,flaresolverr,flaresolverr-jackett,flaresolverr-prowlarr,flaresolverr-helsinki,adguard-proxy-london
+    - HTTP_PROXY=http://adguard-proxy-amsterdam:8888
+    - HTTPS_PROXY=http://adguard-proxy-amsterdam:8888
+    - NO_PROXY=localhost,127.0.0.1,prowlarr,flaresolverr,flaresolverr-jackett,flaresolverr-prowlarr,flaresolverr-helsinki,adguard-proxy-amsterdam
+    - no_proxy=localhost,127.0.0.1,prowlarr,flaresolverr,flaresolverr-jackett,flaresolverr-prowlarr,flaresolverr-helsinki,adguard-proxy-amsterdam
     networks:
       - vpn-net
     restart: unless-stopped
+    depends_on:
+      adguard-proxy-amsterdam:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8191"]
       interval: 30s
@@ -489,7 +548,7 @@ services:
     pids_limit: 384
 
   flaresolverr-helsinki:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
+    image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
     container_name: flaresolverr-helsinki
     init: true
     environment:
@@ -497,9 +556,6 @@ services:
     - LOG_HTML=false
     - CAPTCHA_SOLVER=none
     - TZ=Europe/London
-    - BROWSER_TIMEOUT=120000
-    - MAX_TIMEOUT=45000
-    - SESSION_TIMEOUT_MINUTES=15
     - DISABLE_MEDIA=true
     - HTTP_PROXY=http://adguard-proxy-helsinki:8888
     - HTTPS_PROXY=http://adguard-proxy-helsinki:8888

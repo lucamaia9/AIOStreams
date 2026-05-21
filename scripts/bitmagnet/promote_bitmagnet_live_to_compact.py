@@ -341,8 +341,7 @@ def run_psql(container: str, sql: str, *, tuples_only: bool = True) -> str:
         command.extend(["-qAt"])
     else:
         command.append("-q")
-    command.extend(["-c", sql])
-    result = subprocess.run(command, check=True, capture_output=True, text=True)
+    result = subprocess.run(command, check=True, capture_output=True, text=True, input=sql)
     return result.stdout.strip()
 
 
@@ -626,6 +625,7 @@ def fetch_id_rows(
             merged[str(row["info_hash"]).lower()] = {
                 "tmdb_id": str(row["tmdb_id"]).strip() if row.get("tmdb_id") else None,
                 "imdb_id": str(row["imdb_id"]).strip() if row.get("imdb_id") else None,
+                "episodes_json": str(row["episodes_json"]).strip() if row.get("episodes_json") else None,
             }
     return merged
 
@@ -654,7 +654,8 @@ def _fetch_id_rows_batch(
               THEN ca.value
               ELSE NULL
             END
-          ) AS imdb_id
+          ) AS imdb_id,
+          MAX(tc.episodes::text) AS episodes_json
         FROM wanted w
         LEFT JOIN torrent_contents tc
           ON tc.info_hash = w.info_hash
@@ -672,13 +673,13 @@ def _fetch_id_rows_batch(
 def ensure_schema(connection: sqlite3.Connection) -> None:
     connection.executescript(
         f"""
-        PRAGMA journal_mode=WAL;
-        PRAGMA synchronous=NORMAL;
-        PRAGMA temp_store=MEMORY;
-        PRAGMA busy_timeout=30000;
-        PRAGMA cache_size=-200000;
-        PRAGMA mmap_size=30000000000;
-        PRAGMA foreign_keys=OFF;
+PRAGMA journal_mode=WAL;
+PRAGMA synchronous=NORMAL;
+PRAGMA temp_store=MEMORY;
+PRAGMA busy_timeout=60000;
+PRAGMA cache_size=-200000;
+PRAGMA mmap_size=0;
+PRAGMA foreign_keys=OFF;
 
         CREATE TABLE IF NOT EXISTS live_promotions (
             info_hash TEXT PRIMARY KEY,
@@ -1090,6 +1091,30 @@ def apply_canonical_enrichment(
         merged.get("tmdb_id") is not None or merged.get("imdb_id") is not None
     ):
         merged["match_source"] = "bitmagnet_enrichment"
+
+    episodes_json = enrichment.get("episodes_json")
+    if episodes_json and merged.get("season") is None:
+        try:
+            episodes = json.loads(episodes_json)
+            if isinstance(episodes, dict):
+                seasons = [int(s) for s in episodes.keys() if s.isdigit()]
+                if seasons:
+                    season = min(seasons)
+                    merged["season"] = season
+                    ep_keys = episodes.get(str(season), {})
+                    if isinstance(ep_keys, dict):
+                        ep_nums = [int(e) for e in ep_keys.keys() if e.isdigit()]
+                        if ep_nums:
+                            merged["episode_start"] = min(ep_nums)
+                            merged["episode_end"] = max(ep_nums)
+                            merged["episode_count"] = len(ep_nums)
+                            merged["has_exact_episode"] = int(
+                                len(ep_nums) == 1 and len(seasons) == 1
+                            )
+                            merged["is_multi_episode"] = int(len(ep_nums) > 1)
+        except (json.JSONDecodeError, TypeError, ValueError):
+            pass
+
     return merged
 
 
@@ -1302,6 +1327,17 @@ def sync_batch(
             report["enrichmentCoverage"]["tmdbId"] += 1
         if payload["imdb_id"] is not None:
             report["enrichmentCoverage"]["imdbId"] += 1
+
+        _id_required_classes = {
+            "movie", "episode", "multi_episode",
+            "season_pack", "anime_episode", "anime_pack",
+            "unknown_video",
+        }
+        if payload.get("content_class") in _id_required_classes:
+            if payload.get("tmdb_id") is None and payload.get("imdb_id") is None:
+                report["skippedRows"] += 1
+                report["skipReasons"]["no_id_after_enrichment"] += 1
+                continue
 
         existing_media_row = existing_media.get(info_hash)
         existing_promotion_row = existing_promotions.get(info_hash)
@@ -1677,6 +1713,8 @@ def main() -> None:
 
     connection = sqlite3.connect(search_db)
     connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA busy_timeout=60000")
+    connection.execute("PRAGMA journal_mode=WAL")
     try:
         ensure_schema(connection)
         if args.backfill_ids:
