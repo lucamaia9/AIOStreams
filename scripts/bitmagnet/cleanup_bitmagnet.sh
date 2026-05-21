@@ -95,6 +95,9 @@ sudo docker exec postgres psql -U comet -d comet -v ON_ERROR_STOP=1 << 'EOSQL'
 VACUUM FULL VERBOSE torrents;
 EOSQL
 
+log "Step 4c: SQLite WAL checkpoint (reclaims WAL space)..."
+sudo docker exec comet sh -c 'sqlite3 /app/data/magnetico/active.search.sqlite3 "PRAGMA wal_checkpoint(TRUNCATE);"' 2>/dev/null
+
 # Step 5: Report current stats.
 log "Step 5: Current stats..."
 run_psql >> "$LOG_FILE" 2>&1 << 'EOSQL'
