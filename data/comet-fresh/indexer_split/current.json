@@ -1,0 +1,4064 @@
+{
+  "generated_at_utc": "2026-03-28T13:15:20Z",
+  "run_id": "splitbench_20260328_125734_split30",
+  "scoring_version": "indexer-split-v2",
+  "providers": [
+    {
+      "provider_key": "1337x",
+      "provider": "1337x",
+      "jackett_name": "1337x",
+      "prowlarr_name": "1337x",
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "working",
+      "supports": [
+        "anime"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4585,
+          "p95_latency_s": 1.2172
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.3,
+          "non_empty_rate": 0.26666666666666666,
+          "error_rate": 0.7,
+          "timeout_rate": 0.011111111111111112,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.537,
+          "p95_latency_s": 3.0751
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.42055555555555557,
+        "winner": "jackett",
+        "margin": 0.32944444444444443,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.000 (<0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.800 (>=0.05)"
+          ]
+        },
+        "excluded_content": [
+          "movies",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "bangumimoe",
+      "provider": "bangumi-moe",
+      "jackett_name": "bangumi-moe",
+      "prowlarr_name": "Bangumi Moe",
+      "owner": "prowlarr",
+      "owner_score": 0.6917,
+      "status": "empty",
+      "supports": [
+        "anime"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.451,
+          "p95_latency_s": 1.1948499999999997
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.8333333333333334,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.16666666666666663,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.649,
+          "p95_latency_s": 0.88485
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.6916666666666667,
+        "winner": "prowlarr",
+        "margin": 0.09166666666666667,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.000 (<0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": [
+          "movies",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "bigfangroup",
+      "provider": "BigFANGroup",
+      "jackett_name": null,
+      "prowlarr_name": "BigFANGroup",
+      "owner": "prowlarr",
+      "owner_score": 0.7815,
+      "status": "working",
+      "supports": [
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.9888888888888889,
+          "non_empty_rate": 0.15555555555555556,
+          "error_rate": 0.011111111111111072,
+          "timeout_rate": 0.011111111111111112,
+          "stability_score": 0.9842865159736323,
+          "repeat_non_empty_stddev": 0.01571348402636772,
+          "repeat_success_stddev": 0.01571348402636772,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.8714999999999999,
+          "p95_latency_s": 7.736349999999998
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.7815318662849338,
+        "winner": "prowlarr",
+        "margin": 0.7815318662849338,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.467 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "bitru",
+      "provider": "bitru",
+      "jackett_name": "bitru",
+      "prowlarr_name": "BitRu",
+      "owner": "jackett",
+      "owner_score": 0.6,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.454,
+          "p95_latency_s": 1.1919
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.561,
+          "p95_latency_s": 0.68665
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.4,
+        "winner": "jackett",
+        "margin": 0.19999999999999996,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "bitsearch",
+      "provider": "BitSearch",
+      "jackett_name": null,
+      "prowlarr_name": "BitSearch",
+      "owner": "prowlarr",
+      "owner_score": 0.4,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.598,
+          "p95_latency_s": 0.7332
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.4,
+        "winner": "prowlarr",
+        "margin": 0.4,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "demonoidclone",
+      "provider": "Demonoid Clone",
+      "jackett_name": null,
+      "prowlarr_name": "Demonoid Clone",
+      "owner": "prowlarr",
+      "owner_score": 0.8167,
+      "status": "working",
+      "supports": [
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.26666666666666666,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.806,
+          "p95_latency_s": 1.2853499999999998
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.8166666666666667,
+        "winner": "prowlarr",
+        "margin": 0.8166666666666667,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.800 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "divxtotal",
+      "provider": "divxtotal",
+      "jackett_name": "divxtotal",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.454,
+          "p95_latency_s": 1.1888999999999998
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "dmhy",
+      "provider": "dmhy",
+      "jackett_name": "dmhy",
+      "prowlarr_name": "dmhy",
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4545,
+          "p95_latency_s": 1.18535
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.26666666666666666,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 1.04,
+          "p95_latency_s": 1.3991999999999996
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.6666666666666666,
+        "winner": "jackett",
+        "margin": 0.08333333333333337,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.800 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": [
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "elitetorrentwf",
+      "provider": "elitetorrent-wf",
+      "jackett_name": "elitetorrent-wf",
+      "prowlarr_name": "Elitetorrent-wf",
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.462,
+          "p95_latency_s": 1.2113
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.36666666666666664,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 1.2755,
+          "p95_latency_s": 1.4859499999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.6916666666666667,
+        "winner": "jackett",
+        "margin": 0.05833333333333335,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.600 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.400 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.100 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "extratorrent",
+      "provider": "extratorrent-st",
+      "jackett_name": "extratorrent-st",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4715,
+          "p95_latency_s": 1.1250999999999998
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "exttorrents",
+      "provider": "EXT Torrents",
+      "jackett_name": null,
+      "prowlarr_name": "EXT Torrents",
+      "owner": "prowlarr",
+      "owner_score": 0.9243,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.8777777777777778,
+          "non_empty_rate": 0.8777777777777778,
+          "error_rate": 0.12222222222222223,
+          "timeout_rate": 0.0,
+          "stability_score": 0.9842865159736323,
+          "repeat_non_empty_stddev": 0.01571348402636772,
+          "repeat_success_stddev": 0.01571348402636772,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 6.6285,
+          "p95_latency_s": 7.04335
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.9243096440627114,
+        "winner": "prowlarr",
+        "margin": 0.9243096440627114,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.633 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=1.000 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "eztv",
+      "provider": "eztv",
+      "jackett_name": "eztv",
+      "prowlarr_name": "EZTV",
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.496,
+          "p95_latency_s": 1.1927499999999998
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.5666666666666667,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.751,
+          "p95_latency_s": 1.4190999999999998
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.7416666666666666,
+        "winner": "jackett",
+        "margin": 0.008333333333333415,
+        "sticky": 1.0,
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.600 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.900 (>=0.05)",
+            "name_hint[series]=0.25"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.200 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "ilcorsaronero",
+      "provider": "ilcorsaronero",
+      "jackett_name": "ilcorsaronero",
+      "prowlarr_name": "ilCorSaRoNeRo",
+      "owner": "prowlarr",
+      "owner_score": 0.925,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.497,
+          "p95_latency_s": 0.9762
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.7,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.40549999999999997,
+          "p95_latency_s": 0.7035499999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.9249999999999999,
+        "winner": "prowlarr",
+        "margin": 0.32499999999999996,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.900 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.800 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.400 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "internetarchive",
+      "provider": "internetarchive",
+      "jackett_name": "internetarchive",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.492,
+          "p95_latency_s": 1.01155
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "kickasstorrents",
+      "provider": "kickasstorrents-to",
+      "jackett_name": "kickasstorrents-to",
+      "prowlarr_name": "kickasstorrents.ws",
+      "owner": "prowlarr",
+      "owner_score": 0.9917,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 180.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.506,
+          "p95_latency_s": 1.1111499999999999
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.9666666666666667,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.245,
+          "p95_latency_s": 0.50805
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.9916666666666667,
+        "winner": "prowlarr",
+        "margin": 0.3916666666666667,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.900 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "knaben",
+      "provider": "knaben",
+      "jackett_name": "knaben",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.5,
+          "p95_latency_s": 1.09905
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "limetorrents",
+      "provider": "limetorrents",
+      "jackett_name": "limetorrents",
+      "prowlarr_name": "LimeTorrents",
+      "owner": "prowlarr",
+      "owner_score": 1.0,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.513,
+          "p95_latency_s": 1.09165
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 1.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.353,
+          "p95_latency_s": 0.62845
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 1.0,
+        "winner": "prowlarr",
+        "margin": 0.4,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=1.000 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "magnetcat",
+      "provider": "magnetcat",
+      "jackett_name": "magnetcat",
+      "prowlarr_name": "Magnet Cat",
+      "owner": "jackett",
+      "owner_score": 0.6,
+      "status": "working",
+      "supports": [
+        "anime"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.494,
+          "p95_latency_s": 1.0730999999999997
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.3111111111111111,
+          "non_empty_rate": 0.3111111111111111,
+          "error_rate": 0.6888888888888889,
+          "timeout_rate": 0.0,
+          "stability_score": 0.9842865159736323,
+          "repeat_non_empty_stddev": 0.01571348402636772,
+          "repeat_success_stddev": 0.01571348402636772,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.2065,
+          "p95_latency_s": 0.9289499999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.5843096440627115,
+        "winner": "jackett",
+        "margin": 0.015690355937288514,
+        "sticky": 1.0,
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.000 (<0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.933 (>=0.05)"
+          ]
+        },
+        "excluded_content": [
+          "movies",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "magnetdownload",
+      "provider": "magnetdownload",
+      "jackett_name": "magnetdownload",
+      "prowlarr_name": "MagnetDownload",
+      "owner": "prowlarr",
+      "owner_score": 0.85,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.501,
+          "p95_latency_s": 1.0988499999999999
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 1.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 2.59,
+          "p95_latency_s": 3.49195
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.85,
+        "winner": "prowlarr",
+        "margin": 0.09999999999999998,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=1.000 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "megapeer",
+      "provider": "megapeer",
+      "jackett_name": "megapeer",
+      "prowlarr_name": "MegaPeer",
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.491,
+          "p95_latency_s": 0.9464999999999997
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.5666666666666667,
+          "non_empty_rate": 0.5333333333333333,
+          "error_rate": 0.43333333333333335,
+          "timeout_rate": 0.0,
+          "stability_score": 0.9727834473024092,
+          "repeat_non_empty_stddev": 0.02721655269759086,
+          "repeat_success_stddev": 0.02721655269759086,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.34450000000000003,
+          "p95_latency_s": 2.2959999999999994
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.577584183762028,
+        "winner": "jackett",
+        "margin": 0.17241581623797197,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.733 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.767 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.100 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "mejortorrent",
+      "provider": "mejortorrent",
+      "jackett_name": "mejortorrent",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4935,
+          "p95_latency_s": 0.7468499999999998
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "mikan",
+      "provider": "Mikan",
+      "jackett_name": null,
+      "prowlarr_name": "Mikan",
+      "owner": "prowlarr",
+      "owner_score": 0.7833,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.13333333333333333,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.429,
+          "p95_latency_s": 0.9402499999999997
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.7833333333333333,
+        "winner": "prowlarr",
+        "margin": 0.7833333333333333,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.400 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": [
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "moviesdvdr",
+      "provider": "moviesdvdr",
+      "jackett_name": "moviesdvdr",
+      "prowlarr_name": "MoviesDVDR",
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "working",
+      "supports": [
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.499,
+          "p95_latency_s": 0.78355
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.1,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.613,
+          "p95_latency_s": 0.9005999999999998
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.625,
+        "winner": "jackett",
+        "margin": 0.125,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.300 (>=0.05)",
+            "name_hint[movies]=0.25"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "nekobt",
+      "provider": "nekoBT",
+      "jackett_name": null,
+      "prowlarr_name": "nekoBT",
+      "owner": "prowlarr",
+      "owner_score": 0.7667,
+      "status": "working",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.06666666666666667,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.499,
+          "p95_latency_s": 0.8937499999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.7666666666666666,
+        "winner": "prowlarr",
+        "margin": 0.7666666666666666,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.100 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.100 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "nonameclub",
+      "provider": "noname-club",
+      "jackett_name": "noname-club",
+      "prowlarr_name": "NoNaMe Club",
+      "owner": "prowlarr",
+      "owner_score": 0.8,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4985,
+          "p95_latency_s": 0.8466999999999998
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.8,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.5505,
+          "p95_latency_s": 1.0393
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.8,
+        "winner": "prowlarr",
+        "margin": 0.050000000000000044,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.900 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.500 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "nortorrent",
+      "provider": "nortorrent",
+      "jackett_name": "nortorrent",
+      "prowlarr_name": "NorTorrent",
+      "owner": "jackett",
+      "owner_score": 0.6,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.5055000000000001,
+          "p95_latency_s": 0.8355499999999997
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.011111111111111112,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.9888888888888889,
+          "timeout_rate": 0.0,
+          "stability_score": 0.9937146063894529,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.015713484026367724,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.175,
+          "p95_latency_s": 0.4663999999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.4029460798473068,
+        "winner": "jackett",
+        "margin": 0.19705392015269318,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "nyaasi",
+      "provider": "nyaasi",
+      "jackett_name": "nyaasi",
+      "prowlarr_name": "Nyaa.si",
+      "owner": "prowlarr",
+      "owner_score": 0.7667,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.5085,
+          "p95_latency_s": 0.79785
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.6666666666666666,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.3545,
+          "p95_latency_s": 0.8728499999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.7666666666666666,
+        "winner": "prowlarr",
+        "margin": 0.016666666666666607,
+        "sticky": 1.0,
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.700 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.300 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=1.000 (>=0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "piratebay",
+      "provider": "thepiratebay",
+      "jackett_name": "thepiratebay",
+      "prowlarr_name": "The Pirate Bay",
+      "owner": "prowlarr",
+      "owner_score": 0.8417,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.496,
+          "p95_latency_s": 0.77835
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.9666666666666667,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.339,
+          "p95_latency_s": 0.7988999999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.8416666666666667,
+        "winner": "prowlarr",
+        "margin": 0.09166666666666667,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.900 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "redetorrent",
+      "provider": "redetorrent",
+      "jackett_name": "redetorrent",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.497,
+          "p95_latency_s": 0.8953499999999994
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "rutor",
+      "provider": "rutor",
+      "jackett_name": "rutor",
+      "prowlarr_name": "RuTor",
+      "owner": "prowlarr",
+      "owner_score": 0.6833,
+      "status": "working",
+      "supports": [
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 0.6666666666666666,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.33333333333333337,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4965,
+          "p95_latency_s": 0.8316499999999993
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.3333333333333333,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4405,
+          "p95_latency_s": 1.1069
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6333333333333333,
+        "prowlarr_score": 0.6833333333333332,
+        "winner": "prowlarr",
+        "margin": 0.04999999999999993,
+        "sticky": 1.0,
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "rutrackerru",
+      "provider": "rutracker-ru",
+      "jackett_name": "rutracker-ru",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4875,
+          "p95_latency_s": 0.8487999999999997
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "shanaproject",
+      "provider": "Shana Project",
+      "jackett_name": null,
+      "prowlarr_name": "Shana Project",
+      "owner": "prowlarr",
+      "owner_score": 0.8667,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.4666666666666667,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.331,
+          "p95_latency_s": 0.6125
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.8666666666666667,
+        "winner": "prowlarr",
+        "margin": 0.8666666666666667,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.200 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.200 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=1.000 (>=0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "sktorrentorg",
+      "provider": "SkTorrent.org",
+      "jackett_name": null,
+      "prowlarr_name": "SkTorrent.org",
+      "owner": "prowlarr",
+      "owner_score": 0.8583,
+      "status": "working",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.43333333333333335,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 1.396,
+          "p95_latency_s": 4.1682999999999995
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.8583333333333333,
+        "winner": "prowlarr",
+        "margin": 0.8583333333333333,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.300 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "subsplease",
+      "provider": "subsplease",
+      "jackett_name": "subsplease",
+      "prowlarr_name": "SubsPlease",
+      "owner": "prowlarr",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "anime"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4985,
+          "p95_latency_s": 0.7801999999999999
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.36,
+          "p95_latency_s": 0.6072499999999998
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.75,
+        "winner": "prowlarr",
+        "margin": 0.15000000000000002,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.000 (<0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": [
+          "movies",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "therarbg",
+      "provider": "therarbg",
+      "jackett_name": "therarbg",
+      "prowlarr_name": "TheRARBG",
+      "owner": "prowlarr",
+      "owner_score": 0.9833,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 0.6666666666666666,
+          "non_empty_rate": 0.5666666666666667,
+          "error_rate": 0.33333333333333337,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.51,
+          "p95_latency_s": 0.7717499999999999
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.9333333333333333,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.3655,
+          "p95_latency_s": 0.6839999999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.625,
+        "prowlarr_score": 0.9833333333333333,
+        "winner": "prowlarr",
+        "margin": 0.3583333333333333,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=1.000 (>=0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.700 (>=0.05)",
+            "probe_hit_rate[anime]=0.800 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "tokyotosho",
+      "provider": "tokyotosho",
+      "jackett_name": "tokyotosho",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "anime"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.498,
+          "p95_latency_s": 0.7913
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": [
+          "movies",
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "tokyotoshokan",
+      "provider": "Tokyo Toshokan",
+      "jackett_name": null,
+      "prowlarr_name": "Tokyo Toshokan",
+      "owner": "prowlarr",
+      "owner_score": 0.7844,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.8222222222222222,
+          "non_empty_rate": 0.4,
+          "error_rate": 0.1777777777777778,
+          "timeout_rate": 0.0,
+          "stability_score": 0.9773846747708984,
+          "repeat_non_empty_stddev": 0.027216552697590886,
+          "repeat_success_stddev": 0.01571348402636772,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 1.395,
+          "p95_latency_s": 4.608149999999993
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.7843854789934125,
+        "winner": "prowlarr",
+        "margin": 0.7843854789934125,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.200 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.100 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.900 (>=0.05)",
+            "name_hint[anime]=0.55"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "torrent9",
+      "provider": "torrent9",
+      "jackett_name": "torrent9",
+      "prowlarr_name": "Torrent9",
+      "owner": "prowlarr",
+      "owner_score": 0.8333,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4895,
+          "p95_latency_s": 0.7162999999999999
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.3333333333333333,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.391,
+          "p95_latency_s": 0.5966499999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.8333333333333333,
+        "winner": "prowlarr",
+        "margin": 0.23333333333333328,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=0.800 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.100 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.100 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "torrentcore",
+      "provider": "Torrent[CORE]",
+      "jackett_name": null,
+      "prowlarr_name": "Torrent[CORE]",
+      "owner": "prowlarr",
+      "owner_score": 0.4,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.181,
+          "p95_latency_s": 0.3149999999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.4,
+        "winner": "prowlarr",
+        "margin": 0.4,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "torrentdownload",
+      "provider": "torrentdownload",
+      "jackett_name": "torrentdownload",
+      "prowlarr_name": "Torrent Downloads",
+      "owner": "prowlarr",
+      "owner_score": 1.0,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.487,
+          "p95_latency_s": 0.6987999999999999
+        },
+        "prowlarr": {
+          "queries": 180.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 1.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.437,
+          "p95_latency_s": 0.6547499999999997
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 1.0,
+        "winner": "prowlarr",
+        "margin": 0.4,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=1.000 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "torrentgalaxy",
+      "provider": "torrentgalaxyclone",
+      "jackett_name": "torrentgalaxyclone",
+      "prowlarr_name": "TorrentGalaxyClone",
+      "owner": "prowlarr",
+      "owner_score": 0.9833,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 0.6666666666666666,
+          "non_empty_rate": 0.5666666666666667,
+          "error_rate": 0.33333333333333337,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.5045,
+          "p95_latency_s": 0.7372999999999998
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.9333333333333333,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4255,
+          "p95_latency_s": 0.6849
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.625,
+        "prowlarr_score": 0.9833333333333333,
+        "winner": "prowlarr",
+        "margin": 0.3583333333333333,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=1.000 (>=0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=1.000 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.700 (>=0.05)",
+            "probe_hit_rate[anime]=0.800 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "torrentqq",
+      "provider": "torrentqq",
+      "jackett_name": "torrentqq",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4925,
+          "p95_latency_s": 0.6493499999999999
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "torrentsome",
+      "provider": "torrentsome",
+      "jackett_name": "torrentsome",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.4865,
+          "p95_latency_s": 0.6771
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "torrenttip",
+      "provider": "torrenttip",
+      "jackett_name": "torrenttip",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.41,
+          "p95_latency_s": 0.7642999999999995
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "uindex",
+      "provider": "uindex",
+      "jackett_name": "uindex",
+      "prowlarr_name": "Uindex",
+      "owner": "prowlarr",
+      "owner_score": 0.9583,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.394,
+          "p95_latency_s": 0.7006999999999994
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.8333333333333334,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.38,
+          "p95_latency_s": 0.6201999999999999
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.6,
+        "prowlarr_score": 0.9583333333333334,
+        "winner": "prowlarr",
+        "margin": 0.3583333333333334,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.800 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "probe_hit_rate[anime]=0.700 (>=0.05)"
+          ]
+        },
+        "excluded_content": []
+      }
+    },
+    {
+      "provider_key": "uztracker",
+      "provider": "UzTracker",
+      "jackett_name": null,
+      "prowlarr_name": "UzTracker",
+      "owner": "prowlarr",
+      "owner_score": 0.8917,
+      "status": "working",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.5666666666666667,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.5954999999999999,
+          "p95_latency_s": 0.8021999999999998
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.0,
+        "prowlarr_score": 0.8916666666666666,
+        "winner": "prowlarr",
+        "margin": 0.8916666666666666,
+        "sticky": 0.0,
+        "loser": "jackett",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=1.000 (>=0.05)"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.700 (>=0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "wolfmax4k",
+      "provider": "wolfmax4k",
+      "jackett_name": "wolfmax4k",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.371,
+          "p95_latency_s": 0.6758999999999991
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "name_hint[movies]=0.25",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    },
+    {
+      "provider_key": "yts",
+      "provider": "yts",
+      "jackett_name": "yts",
+      "prowlarr_name": "YTS",
+      "owner": "jackett",
+      "owner_score": 0.725,
+      "status": "working",
+      "supports": [
+        "anime",
+        "movies"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 0.6666666666666666,
+          "non_empty_rate": 0.36666666666666664,
+          "error_rate": 0.33333333333333337,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.3005,
+          "p95_latency_s": 0.48424999999999996
+        },
+        "prowlarr": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.3333333333333333,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.3675,
+          "p95_latency_s": 0.5964
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.725,
+        "prowlarr_score": 0.6833333333333332,
+        "winner": "jackett",
+        "margin": 0.04166666666666674,
+        "sticky": 1.0,
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=1.000 (>=0.05)",
+            "probe_hit_rate[movies]=1.000 (>=0.05)",
+            "name_hint[movies]=0.25"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "probe_hit_rate[series]=0.000 (<0.05)"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.100 (>=0.05)",
+            "probe_hit_rate[anime]=0.000 (<0.05)"
+          ]
+        },
+        "excluded_content": [
+          "series"
+        ]
+      }
+    },
+    {
+      "provider_key": "zktorrent",
+      "provider": "zktorrent",
+      "jackett_name": "zktorrent",
+      "prowlarr_name": null,
+      "owner": "jackett",
+      "owner_score": 0.75,
+      "status": "empty",
+      "supports": [
+        "movies",
+        "series"
+      ],
+      "stats": {
+        "jackett": {
+          "queries": 90.0,
+          "success_rate": 1.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 0.0,
+          "timeout_rate": 0.0,
+          "stability_score": 1.0,
+          "repeat_non_empty_stddev": 0.0,
+          "repeat_success_stddev": 0.0,
+          "repeat_groups": 3.0,
+          "p50_latency_s": 0.2185,
+          "p95_latency_s": 0.39505
+        },
+        "prowlarr": {
+          "queries": 0.0,
+          "success_rate": 0.0,
+          "non_empty_rate": 0.0,
+          "error_rate": 1.0,
+          "timeout_rate": 1.0,
+          "stability_score": 0.0,
+          "repeat_non_empty_stddev": 1.0,
+          "repeat_success_stddev": 1.0,
+          "repeat_groups": 0.0,
+          "p50_latency_s": 999.0,
+          "p95_latency_s": 999.0
+        }
+      },
+      "decision_meta": {
+        "jackett_score": 0.75,
+        "prowlarr_score": 0.0,
+        "winner": "jackett",
+        "margin": 0.75,
+        "sticky": 0.0,
+        "loser": "prowlarr",
+        "content_reasons": {
+          "movies": [
+            "probe_hit_rate[movies]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "series": [
+            "probe_hit_rate[series]=0.000 (<0.05)",
+            "fallback_default_support"
+          ],
+          "anime": [
+            "probe_hit_rate[anime]=0.000 (<0.05)",
+            "excluded_by_default_fallback"
+          ]
+        },
+        "excluded_content": [
+          "anime"
+        ]
+      }
+    }
+  ],
+  "movies": [
+    {
+      "provider_key": "bigfangroup",
+      "provider": "BigFANGroup",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "BigFANGroup",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "bitru",
+      "provider": "bitru",
+      "owner": "jackett",
+      "jackett_name": "bitru",
+      "prowlarr_name": "BitRu",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "bitsearch",
+      "provider": "BitSearch",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "BitSearch",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "demonoidclone",
+      "provider": "Demonoid Clone",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Demonoid Clone",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "divxtotal",
+      "provider": "divxtotal",
+      "owner": "jackett",
+      "jackett_name": "divxtotal",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "dmhy",
+      "provider": "dmhy",
+      "owner": "jackett",
+      "jackett_name": "dmhy",
+      "prowlarr_name": "dmhy",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "elitetorrentwf",
+      "provider": "elitetorrent-wf",
+      "owner": "jackett",
+      "jackett_name": "elitetorrent-wf",
+      "prowlarr_name": "Elitetorrent-wf",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "extratorrent",
+      "provider": "extratorrent-st",
+      "owner": "jackett",
+      "jackett_name": "extratorrent-st",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "exttorrents",
+      "provider": "EXT Torrents",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "EXT Torrents",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "eztv",
+      "provider": "eztv",
+      "owner": "jackett",
+      "jackett_name": "eztv",
+      "prowlarr_name": "EZTV",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "ilcorsaronero",
+      "provider": "ilcorsaronero",
+      "owner": "prowlarr",
+      "jackett_name": "ilcorsaronero",
+      "prowlarr_name": "ilCorSaRoNeRo",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "internetarchive",
+      "provider": "internetarchive",
+      "owner": "jackett",
+      "jackett_name": "internetarchive",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "kickasstorrents",
+      "provider": "kickasstorrents-to",
+      "owner": "prowlarr",
+      "jackett_name": "kickasstorrents-to",
+      "prowlarr_name": "kickasstorrents.ws",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "knaben",
+      "provider": "knaben",
+      "owner": "jackett",
+      "jackett_name": "knaben",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "limetorrents",
+      "provider": "limetorrents",
+      "owner": "prowlarr",
+      "jackett_name": "limetorrents",
+      "prowlarr_name": "LimeTorrents",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "magnetdownload",
+      "provider": "magnetdownload",
+      "owner": "prowlarr",
+      "jackett_name": "magnetdownload",
+      "prowlarr_name": "MagnetDownload",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "megapeer",
+      "provider": "megapeer",
+      "owner": "jackett",
+      "jackett_name": "megapeer",
+      "prowlarr_name": "MegaPeer",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "mejortorrent",
+      "provider": "mejortorrent",
+      "owner": "jackett",
+      "jackett_name": "mejortorrent",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "mikan",
+      "provider": "Mikan",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Mikan",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "moviesdvdr",
+      "provider": "moviesdvdr",
+      "owner": "jackett",
+      "jackett_name": "moviesdvdr",
+      "prowlarr_name": "MoviesDVDR",
+      "confidence": 0.7
+    },
+    {
+      "provider_key": "nekobt",
+      "provider": "nekoBT",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "nekoBT",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "nonameclub",
+      "provider": "noname-club",
+      "owner": "prowlarr",
+      "jackett_name": "noname-club",
+      "prowlarr_name": "NoNaMe Club",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "nortorrent",
+      "provider": "nortorrent",
+      "owner": "jackett",
+      "jackett_name": "nortorrent",
+      "prowlarr_name": "NorTorrent",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "nyaasi",
+      "provider": "nyaasi",
+      "owner": "prowlarr",
+      "jackett_name": "nyaasi",
+      "prowlarr_name": "Nyaa.si",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "piratebay",
+      "provider": "thepiratebay",
+      "jackett_name": "thepiratebay",
+      "prowlarr_name": "The Pirate Bay",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "redetorrent",
+      "provider": "redetorrent",
+      "owner": "jackett",
+      "jackett_name": "redetorrent",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "rutor",
+      "provider": "rutor",
+      "owner": "prowlarr",
+      "jackett_name": "rutor",
+      "prowlarr_name": "RuTor",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "rutrackerru",
+      "provider": "rutracker-ru",
+      "owner": "jackett",
+      "jackett_name": "rutracker-ru",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "shanaproject",
+      "provider": "Shana Project",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Shana Project",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "sktorrentorg",
+      "provider": "SkTorrent.org",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "SkTorrent.org",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "therarbg",
+      "provider": "therarbg",
+      "owner": "prowlarr",
+      "jackett_name": "therarbg",
+      "prowlarr_name": "TheRARBG",
+      "confidence": 0.9
+    },
+    {
+      "provider_key": "tokyotoshokan",
+      "provider": "Tokyo Toshokan",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Tokyo Toshokan",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrent9",
+      "provider": "torrent9",
+      "owner": "prowlarr",
+      "jackett_name": "torrent9",
+      "prowlarr_name": "Torrent9",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentcore",
+      "provider": "Torrent[CORE]",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Torrent[CORE]",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "torrentdownload",
+      "provider": "torrentdownload",
+      "owner": "prowlarr",
+      "jackett_name": "torrentdownload",
+      "prowlarr_name": "Torrent Downloads",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentgalaxy",
+      "provider": "torrentgalaxyclone",
+      "owner": "prowlarr",
+      "jackett_name": "torrentgalaxyclone",
+      "prowlarr_name": "TorrentGalaxyClone",
+      "confidence": 0.9
+    },
+    {
+      "provider_key": "torrentqq",
+      "provider": "torrentqq",
+      "owner": "jackett",
+      "jackett_name": "torrentqq",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "torrentsome",
+      "provider": "torrentsome",
+      "owner": "jackett",
+      "jackett_name": "torrentsome",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "torrenttip",
+      "provider": "torrenttip",
+      "owner": "jackett",
+      "jackett_name": "torrenttip",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "uindex",
+      "provider": "uindex",
+      "owner": "prowlarr",
+      "jackett_name": "uindex",
+      "prowlarr_name": "Uindex",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "uztracker",
+      "provider": "UzTracker",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "UzTracker",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "wolfmax4k",
+      "provider": "wolfmax4k",
+      "owner": "jackett",
+      "jackett_name": "wolfmax4k",
+      "prowlarr_name": null,
+      "confidence": 0.25
+    },
+    {
+      "provider_key": "yts",
+      "provider": "yts",
+      "owner": "jackett",
+      "jackett_name": "yts",
+      "prowlarr_name": "YTS",
+      "confidence": 1.15
+    },
+    {
+      "provider_key": "zktorrent",
+      "provider": "zktorrent",
+      "owner": "jackett",
+      "jackett_name": "zktorrent",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    }
+  ],
+  "series": [
+    {
+      "provider_key": "bitru",
+      "provider": "bitru",
+      "owner": "jackett",
+      "jackett_name": "bitru",
+      "prowlarr_name": "BitRu",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "bitsearch",
+      "provider": "BitSearch",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "BitSearch",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "divxtotal",
+      "provider": "divxtotal",
+      "owner": "jackett",
+      "jackett_name": "divxtotal",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "elitetorrentwf",
+      "provider": "elitetorrent-wf",
+      "owner": "jackett",
+      "jackett_name": "elitetorrent-wf",
+      "prowlarr_name": "Elitetorrent-wf",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "extratorrent",
+      "provider": "extratorrent-st",
+      "owner": "jackett",
+      "jackett_name": "extratorrent-st",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "exttorrents",
+      "provider": "EXT Torrents",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "EXT Torrents",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "eztv",
+      "provider": "eztv",
+      "owner": "jackett",
+      "jackett_name": "eztv",
+      "prowlarr_name": "EZTV",
+      "confidence": 0.7
+    },
+    {
+      "provider_key": "ilcorsaronero",
+      "provider": "ilcorsaronero",
+      "owner": "prowlarr",
+      "jackett_name": "ilcorsaronero",
+      "prowlarr_name": "ilCorSaRoNeRo",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "internetarchive",
+      "provider": "internetarchive",
+      "owner": "jackett",
+      "jackett_name": "internetarchive",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "kickasstorrents",
+      "provider": "kickasstorrents-to",
+      "owner": "prowlarr",
+      "jackett_name": "kickasstorrents-to",
+      "prowlarr_name": "kickasstorrents.ws",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "knaben",
+      "provider": "knaben",
+      "owner": "jackett",
+      "jackett_name": "knaben",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "limetorrents",
+      "provider": "limetorrents",
+      "owner": "prowlarr",
+      "jackett_name": "limetorrents",
+      "prowlarr_name": "LimeTorrents",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "magnetdownload",
+      "provider": "magnetdownload",
+      "owner": "prowlarr",
+      "jackett_name": "magnetdownload",
+      "prowlarr_name": "MagnetDownload",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "megapeer",
+      "provider": "megapeer",
+      "owner": "jackett",
+      "jackett_name": "megapeer",
+      "prowlarr_name": "MegaPeer",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "mejortorrent",
+      "provider": "mejortorrent",
+      "owner": "jackett",
+      "jackett_name": "mejortorrent",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "nekobt",
+      "provider": "nekoBT",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "nekoBT",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "nonameclub",
+      "provider": "noname-club",
+      "owner": "prowlarr",
+      "jackett_name": "noname-club",
+      "prowlarr_name": "NoNaMe Club",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "nortorrent",
+      "provider": "nortorrent",
+      "owner": "jackett",
+      "jackett_name": "nortorrent",
+      "prowlarr_name": "NorTorrent",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "nyaasi",
+      "provider": "nyaasi",
+      "owner": "prowlarr",
+      "jackett_name": "nyaasi",
+      "prowlarr_name": "Nyaa.si",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "piratebay",
+      "provider": "thepiratebay",
+      "jackett_name": "thepiratebay",
+      "prowlarr_name": "The Pirate Bay",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "redetorrent",
+      "provider": "redetorrent",
+      "owner": "jackett",
+      "jackett_name": "redetorrent",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "rutrackerru",
+      "provider": "rutracker-ru",
+      "owner": "jackett",
+      "jackett_name": "rutracker-ru",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "shanaproject",
+      "provider": "Shana Project",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Shana Project",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "sktorrentorg",
+      "provider": "SkTorrent.org",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "SkTorrent.org",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "therarbg",
+      "provider": "therarbg",
+      "owner": "prowlarr",
+      "jackett_name": "therarbg",
+      "prowlarr_name": "TheRARBG",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "tokyotoshokan",
+      "provider": "Tokyo Toshokan",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Tokyo Toshokan",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrent9",
+      "provider": "torrent9",
+      "owner": "prowlarr",
+      "jackett_name": "torrent9",
+      "prowlarr_name": "Torrent9",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentcore",
+      "provider": "Torrent[CORE]",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Torrent[CORE]",
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "torrentdownload",
+      "provider": "torrentdownload",
+      "owner": "prowlarr",
+      "jackett_name": "torrentdownload",
+      "prowlarr_name": "Torrent Downloads",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentgalaxy",
+      "provider": "torrentgalaxyclone",
+      "owner": "prowlarr",
+      "jackett_name": "torrentgalaxyclone",
+      "prowlarr_name": "TorrentGalaxyClone",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentqq",
+      "provider": "torrentqq",
+      "owner": "jackett",
+      "jackett_name": "torrentqq",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "torrentsome",
+      "provider": "torrentsome",
+      "owner": "jackett",
+      "jackett_name": "torrentsome",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "torrenttip",
+      "provider": "torrenttip",
+      "owner": "jackett",
+      "jackett_name": "torrenttip",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "uindex",
+      "provider": "uindex",
+      "owner": "prowlarr",
+      "jackett_name": "uindex",
+      "prowlarr_name": "Uindex",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "uztracker",
+      "provider": "UzTracker",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "UzTracker",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "wolfmax4k",
+      "provider": "wolfmax4k",
+      "owner": "jackett",
+      "jackett_name": "wolfmax4k",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    },
+    {
+      "provider_key": "zktorrent",
+      "provider": "zktorrent",
+      "owner": "jackett",
+      "jackett_name": "zktorrent",
+      "prowlarr_name": null,
+      "confidence": 0.0
+    }
+  ],
+  "anime": [
+    {
+      "provider_key": "1337x",
+      "provider": "1337x",
+      "jackett_name": "1337x",
+      "prowlarr_name": "1337x",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "bangumimoe",
+      "provider": "bangumi-moe",
+      "owner": "prowlarr",
+      "jackett_name": "bangumi-moe",
+      "prowlarr_name": "Bangumi Moe",
+      "confidence": 0.55
+    },
+    {
+      "provider_key": "dmhy",
+      "provider": "dmhy",
+      "owner": "jackett",
+      "jackett_name": "dmhy",
+      "prowlarr_name": "dmhy",
+      "confidence": 0.55
+    },
+    {
+      "provider_key": "elitetorrentwf",
+      "provider": "elitetorrent-wf",
+      "owner": "jackett",
+      "jackett_name": "elitetorrent-wf",
+      "prowlarr_name": "Elitetorrent-wf",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "exttorrents",
+      "provider": "EXT Torrents",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "EXT Torrents",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "eztv",
+      "provider": "eztv",
+      "owner": "jackett",
+      "jackett_name": "eztv",
+      "prowlarr_name": "EZTV",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "ilcorsaronero",
+      "provider": "ilcorsaronero",
+      "owner": "prowlarr",
+      "jackett_name": "ilcorsaronero",
+      "prowlarr_name": "ilCorSaRoNeRo",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "kickasstorrents",
+      "provider": "kickasstorrents-to",
+      "owner": "prowlarr",
+      "jackett_name": "kickasstorrents-to",
+      "prowlarr_name": "kickasstorrents.ws",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "limetorrents",
+      "provider": "limetorrents",
+      "owner": "prowlarr",
+      "jackett_name": "limetorrents",
+      "prowlarr_name": "LimeTorrents",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "magnetcat",
+      "provider": "magnetcat",
+      "owner": "jackett",
+      "jackett_name": "magnetcat",
+      "prowlarr_name": "Magnet Cat",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "magnetdownload",
+      "provider": "magnetdownload",
+      "owner": "prowlarr",
+      "jackett_name": "magnetdownload",
+      "prowlarr_name": "MagnetDownload",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "megapeer",
+      "provider": "megapeer",
+      "owner": "jackett",
+      "jackett_name": "megapeer",
+      "prowlarr_name": "MegaPeer",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "mikan",
+      "provider": "Mikan",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Mikan",
+      "confidence": 0.55
+    },
+    {
+      "provider_key": "nonameclub",
+      "provider": "noname-club",
+      "owner": "prowlarr",
+      "jackett_name": "noname-club",
+      "prowlarr_name": "NoNaMe Club",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "nyaasi",
+      "provider": "nyaasi",
+      "owner": "prowlarr",
+      "jackett_name": "nyaasi",
+      "prowlarr_name": "Nyaa.si",
+      "confidence": 1.0
+    },
+    {
+      "provider_key": "piratebay",
+      "provider": "thepiratebay",
+      "jackett_name": "thepiratebay",
+      "prowlarr_name": "The Pirate Bay",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "shanaproject",
+      "provider": "Shana Project",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Shana Project",
+      "confidence": 1.0
+    },
+    {
+      "provider_key": "subsplease",
+      "provider": "subsplease",
+      "owner": "prowlarr",
+      "jackett_name": "subsplease",
+      "prowlarr_name": "SubsPlease",
+      "confidence": 0.55
+    },
+    {
+      "provider_key": "therarbg",
+      "provider": "therarbg",
+      "owner": "prowlarr",
+      "jackett_name": "therarbg",
+      "prowlarr_name": "TheRARBG",
+      "confidence": 0.9
+    },
+    {
+      "provider_key": "tokyotosho",
+      "provider": "tokyotosho",
+      "owner": "jackett",
+      "jackett_name": "tokyotosho",
+      "prowlarr_name": null,
+      "confidence": 0.55
+    },
+    {
+      "provider_key": "tokyotoshokan",
+      "provider": "Tokyo Toshokan",
+      "owner": "prowlarr",
+      "jackett_name": null,
+      "prowlarr_name": "Tokyo Toshokan",
+      "confidence": 1.0
+    },
+    {
+      "provider_key": "torrent9",
+      "provider": "torrent9",
+      "owner": "prowlarr",
+      "jackett_name": "torrent9",
+      "prowlarr_name": "Torrent9",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentdownload",
+      "provider": "torrentdownload",
+      "owner": "prowlarr",
+      "jackett_name": "torrentdownload",
+      "prowlarr_name": "Torrent Downloads",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "torrentgalaxy",
+      "provider": "torrentgalaxyclone",
+      "owner": "prowlarr",
+      "jackett_name": "torrentgalaxyclone",
+      "prowlarr_name": "TorrentGalaxyClone",
+      "confidence": 0.9
+    },
+    {
+      "provider_key": "uindex",
+      "provider": "uindex",
+      "owner": "prowlarr",
+      "jackett_name": "uindex",
+      "prowlarr_name": "Uindex",
+      "confidence": 0.45
+    },
+    {
+      "provider_key": "yts",
+      "provider": "yts",
+      "owner": "jackett",
+      "jackett_name": "yts",
+      "prowlarr_name": "YTS",
+      "confidence": 0.45
+    }
+  ]
+}
