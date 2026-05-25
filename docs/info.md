@@ -1,5 +1,49 @@
 # AIOStreams / Comet Local Changelog
 
+## 2026-05-25 -- BitMagnet Classifier Optimizations (Phase 1 + 2)
+
+**Problem:** The `promote_bitmagnet_live_to_compact.py` promotion script consumed ~25-31 minutes per run, with `classifySeconds` being the dominant bottleneck (~90% of total). The Python adult classifier was the primary CPU consumer.
+
+**Changes:**
+
+1. **Memoization (`lru_cache`):**
+   - `classify_title()`: wrapped with `@lru_cache(maxsize=65536)` to deduplicate same-title calls across the 9 candidate paths per torrent
+   - `normalize_title()`: wrapped with `@lru_cache(maxsize=16384)`
+   - `build_matchable_text()`: wrapped with `@lru_cache(maxsize=16384)`
+
+2. **Aho-Corasick CJK pattern matching:**
+   - Replaced `any(term in clean_title for term in ADULT_CJK_TERMS)` with single-pass `pyahocorasick` automaton
+   - 106 CJK substring terms: 106 scans → 1 scan
+   - Zero behavioral change verified against all 106 terms
+
+3. **Fix A': Filter non-video files from adult candidates:**
+   - `PRIMARY_ADULT_CANDIDATE_LIMIT` reduced from 8 to 3
+   - `evaluate_compact_filters` now only passes video files to `adult_confidence_for_candidates`
+   - Non-video files (subs, images, samples) that never trigger adult patterns are no longer fed to `classify_title`
+   - `supplemental_adult_score` still scans ALL paths with `supplemental_adult_pattern_hit` (cheap check)
+
+4. **Pre-compute software keyword flag:**
+   - `has_software_keyword` added to `PreparedPath` dataclass
+   - `contains_software_keyword` (30 regex patterns) computed once in `prepare_row_facts` instead of re-called in `evaluate_compact_filters`
+
+5. **Batch size increase:**
+   - `run_bitmagnet_live_promotion.sh`: `--batch-size` increased from 1000 to 2000
+
+**Files changed:**
+- `bitmagnet-media/classifier/shared_adult_title_classifier.py`
+- `bitmagnet-media/classifier/adult_pattern_engine.py`
+- `bitmagnet-media/classifier/compact_media_search.py`
+- `scripts/bitmagnet/run_bitmagnet_live_promotion.sh`
+- `scripts/testing/test_classifier_optimization.py`
+
+**Expected impact:** ~30-40% reduction in classifySeconds (estimated from micro-benchmarks and audit runs). 53-minute CPU peak should drop to ~30-35 minutes.
+
+## 2026-05-21 -- FlareSolverr OOM Fix + Prowlarr Backoff Resolution
+
+**FlareSolverr OOM:** `flaresolverr-prowlarr` had 35 OOM kills in 48h (Chromium bursting past 512MB cgroup limit under concurrent Prowlarr indexer refreshes). VPN-routed instances (`prowlarr`, `jackett`, `helsinki`) promoted from `512m` to `768m` + `shm_size: 64m` + explicit `memswap_limit: 768m` to match the generic `flaresolverr` which had zero OOM events.
+
+**Prowlarr backoff resolution:** EZTV indexer stuck in exponential backoff from earlier failures. Deleting `IndexerStatus` rows doesn't work because Prowlarr re-tests on restart. Fix: set `DisabledTill` to the past and `EscalationLevel = 0` in `prowlarr.db` to break the cycle. Documented in `INFRASTRUCTURE.md`.
+
 ## 2026-05-20 -- Prowlarr Indexer Health Fix (Amsterdam VPN)
 
 **Root cause:** Prowlarr connects to indexers directly from Oracle Cloud. Jackett uses Squid proxy through VPN and has no timeout issues. Prowlarr accumulates ~967 cooldown/suppression events in 24h due to timeouts and geo-blocking.
@@ -1357,7 +1401,7 @@ This is a chronological changelog of significant changes. For operational detail
 - Details: `IPTV_OPERATIONS.md`
 
 ## 2026-03-12 -- IPTV Addon Launched
-- New self-hosted IPTV live channels addon: `iptv.douglinhas.mywire.org`
+- New self-hosted IPTV live channels addon: `iptv.mrdouglas.uk`
 - Branding: TV Doug
 - Personal mode consumes aggregator addon_catalog.json
 - Details: `IPTV_OPERATIONS.md`
@@ -1367,7 +1411,7 @@ This is a chronological changelog of significant changes. For operational detail
 
 ## 2026-03-11 -- AIOMetadata Staged
 - Services added to compose: `aiometadata`, `aiometadata_redis`
-- Public URL: `https://aiometadata.douglinhas.mywire.org`
+- Public URL: `https://aiometadata.mrdouglas.uk`
 
 ## 2026-03-11 -- BitMagnet Scraping Disabled
 - `SCRAPE_BITMAGNET=False` on both `comet` and `comet-builder.env`
